@@ -10,6 +10,7 @@ Checked means implemented; the validation section in STATUS.md says what was act
 - [x] Build dashboard, app shell, responsive styles, and subtle motion.
 - [x] Author six original starter missions (workspace, Git, Python, problem solving, web, API).
 - [x] Implement lesson, practice, progressive hints, debugging, build, quiz, evidence, reflection flow.
+- [x] Add an in-browser editor, Python/SQLite runners, HTML preview, local mission drafts, and animated responsive workbench.
 - [x] Add 19-level roadmap with explicit ready/planned states.
 - [x] Add original capstone project briefs.
 - [x] Research and record requested resources, licenses, and credential facts.
@@ -23,15 +24,18 @@ Checked means implemented; the validation section in STATUS.md says what was act
 - [ ] Finish F:-only deployment script and account handoff.
 - [x] Pin dependency versions and preserve lockfile.
 - [x] Run meaningful logic tests (17 passed) and TypeScript check.
-- [ ] Run production build (currently running).
+- [x] Run production build after browser workbench, CSP, and curriculum updates.
+- [x] Verify browser Python input, SQLite queries, public GitHub API reads, worker CSP, and responsive no-overflow layout.
 - [x] Check implemented page routes (14 HTTP 200 responses).
 - [ ] Check real GitHub endpoint responses (mocked failure cases passed).
 - [x] Validate project-local skill frontmatter and independently test the resumption workflow.
 - [ ] Record final known limitations and exact next actions.
 - [ ] Publish on Vercel after account authentication is available; verify deployment URL.
+- [ ] Add Supabase authentication and row-level secured cloud progress sync after a project is configured.
 
 ## Milestone 2 — durable personal platform (not started)
 
+- [ ] Configure Supabase project and authentication for cross-device account progress.
 - [ ] PostgreSQL schema, migrations, access isolation, and authenticated progress sync.
 - [ ] GitHub OAuth with minimum required scopes and repository ownership checks.
 - [ ] Server-side AI tutor with hint progression, budget/rate limits, and per-mission context.

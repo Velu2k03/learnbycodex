@@ -25,16 +25,16 @@ export const levels = [
 
 export const missions: Mission[] = [
   {
-    id: "your-first-workspace", level: 0, title: "Make your computer a workshop", subtitle: "Your first small win: a file, a terminal, and a working setup.", skill: "Developer tools", minutes: 60,
-    objectives: ["Understand what your editor, terminal, and runtime each do", "Create and read a file from your own project folder", "Check that Git and Python are ready"],
+    id: "your-first-workspace", level: 0, title: "Meet your browser workshop", subtitle: "Your first small win: an editor, a console, and a program that runs here.", skill: "Developer tools", minutes: 60,
+    objectives: ["Understand what the editor, terminal, and runtime each do", "Edit and read a sample project file in this browser", "Understand where Git and Python fit in a coding workflow"],
     lesson: [
-      { title: "Three tools. Three different jobs.", body: "Your editor is where you write and save files. Your terminal is where you type commands. A runtime, such as Python, runs your program. VS Code brings the editor and terminal together, but they still do different jobs." },
-      { title: "Everything starts with a folder", body: "A project is simply a folder containing your work. Create a folder on F: called ai-learning-lab and open it in VS Code. Save a file called hello.txt with the sentence: I can build one small thing today." },
-      { title: "Know where you are", body: "A terminal always has a current folder. A command with a short filename looks in that folder. If a command cannot find your file, check your location and whether the file has been saved. You usually do not need to reinstall anything." },
+      { title: "Three tools. Three different jobs.", body: "The editor is where you write code. The terminal is where you enter commands. A runtime, such as Python, runs a program. This learning lab keeps these tools together in the browser. Its guided terminal is a simulation; it cannot access your computer." },
+      { title: "A project is a folder of work", body: "A project groups related files. In this browser lab, sample files and your saved code live in a workspace just for learning. Your drafts stay in this browser and are not automatically published to GitHub." },
+      { title: "Know where a command runs", body: "A real terminal uses a current folder. This lesson uses a guided simulation with sample files, so commands cannot install software, change your computer, or publish anything. The Python tab runs real Python in a separate browser worker." },
     ],
-    code: "# In the PowerShell terminal inside VS Code\nGet-Location\nGet-ChildItem\nGet-Content hello.txt\n\n# Check your tools\ngit --version\npy --version", language: "PowerShell",
+    code: "# Guided terminal simulation: sample data only\nGet-Location\nGet-ChildItem\nGet-Content hello.txt\ngit status\npy --version", language: "PowerShell",
     practice: { prompt: "Your terminal is in F:\\Projects, but hello.txt is inside F:\\Projects\\ai-learning-lab. Write the PowerShell command to enter that project folder.", answer: ["set-location .\\ai-learning-lab", "cd .\\ai-learning-lab", "cd ai-learning-lab", "set-location ai-learning-lab", "cd f:\\projects\\ai-learning-lab", "set-location f:\\projects\\ai-learning-lab"], explanation: "Set-Location changes the current folder. The .\\ prefix means a folder inside your current location. cd is a shorter alias.", hints: ["You need to change your current folder, not move the file.", "PowerShell's Set-Location command takes a folder path.", "Try Set-Location .\\ai-learning-lab"] },
-    debug: { code: "PS F:\\Projects> Get-Content hello.txt\nCannot find path 'F:\\Projects\\hello.txt'", question: "The file exists in ai-learning-lab. What would you inspect first?", explanation: "Run Get-Location and Get-ChildItem. Enter ai-learning-lab with Set-Location, save the file in VS Code, and run Get-Content hello.txt again." },
+    debug: { code: "PS F:\\Projects> Get-Content hello.txt\nCannot find path 'F:\\Projects\\hello.txt'", question: "The sample file exists in ai-learning-lab. What would you inspect first?", explanation: "In a real terminal, inspect the current folder and its files. In this lab, use Get-Location and Get-ChildItem to rehearse; this simulation cannot read or change your computer." },
     tasks: ["Create F:\\Projects\\ai-learning-lab and open the folder in VS Code", "Create hello.txt, write your sentence, and save it", "Open Terminal → New Terminal and read hello.txt with Get-Content", "Check Git and Python versions; install missing tools from their official sites on F:", "Create a learning-log.md file and record the commands that worked"],
     quiz: [
       { prompt: "What does Get-Location show?", options: ["Your current terminal folder", "Your GitHub account", "Your Python version"], answer: 0, explanation: "Commands run relative to the terminal's current folder." },
@@ -43,7 +43,7 @@ export const missions: Mission[] = [
       { prompt: "Get-ChildItem is useful for…", options: ["Publishing your app", "Listing items in a folder", "Creating a Git commit"], answer: 1, explanation: "Listing items helps you check that the file is really there." },
       { prompt: "Your first setup command fails. What is a useful next step?", options: ["Read the error and check the current folder", "Assume you cannot code", "Reinstall every application"], answer: 0, explanation: "An error provides information. Check one small assumption at a time." },
     ],
-    boss: "Close and reopen VS Code. Find your project, create a second text file, and read it from the terminal without copying the commands above.",
+    boss: "Without copying the commands above, use the guided terminal to inspect the sample folder and explain how a real terminal would find a file.",
     reflection: "Which part was confusing: the editor, the folder, or the terminal? What did you check to make it work?", resources: ["vscode", "python", "git"],
   },
   {

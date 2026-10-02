@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LabProvider } from "@/components/lab-provider";
 import { AppShell } from "@/components/app-shell";
 import "./globals.css";
+import "./workbench.css";
 export const metadata: Metadata = {
   title: { default: "DrVelu · AI Engineering Lab", template: "%s · DrVelu Lab" },
   description: "One mission at a time. Learn, build, and prove your AI engineering skills with your personal learning lab.",

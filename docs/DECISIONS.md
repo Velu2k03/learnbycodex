@@ -11,6 +11,7 @@ Last updated: 2026-10-02 (Asia/Manila).
 - Desired loop: learn → practice → build → test → GitHub → reflect → advance.
 - Desired outcome: real projects, GitHub evidence, official credentials where useful, and a resume customized to actual work.
 - Host on Vercel. Use Next.js/TypeScript. A future learn.drvelu.com subdomain must not replace the main domain.
+- For future authenticated cross-device progress storage, prefer Supabase's free tier. Keep Vercel as the app host; Cloudflare domain/DNS access does not change that hosting choice.
 - Strictly use F: for the project, tools, downloads, package cache, and temporary build files. Initial runtime files downloaded before this instruction were moved from C: to F:.
 - Keep recoverable project skills, notes, plan, checklist, completed work, and next actions so another agent can resume after an interruption.
 
@@ -18,6 +19,7 @@ Last updated: 2026-10-02 (Asia/Manila).
 
 - First six levels have original interactive missions. Levels 6–18 remain explicitly planned.
 - Progress is local to this browser, with backup/export and recovery. PostgreSQL/authentication will be a later milestone; do not imply cloud sync.
+- Browser editor drafts are also local per mission. Python, SQLite, and web previews run in browser workers/frames; Git and PowerShell are guided simulations, not access to the user's computer.
 - Guided hints are prewritten. No live AI model connection is configured.
 - Public GitHub metadata checks are read-only and do not prove ownership, authorship, or project quality. OAuth and detailed review are later.
 - Certification center links to provider courses/exams and records self-reported status. It does not issue or verify provider credentials.
