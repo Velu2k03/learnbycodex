@@ -1,48 +1,22 @@
-# Vercel deployment
+﻿# Existing GitHub to Vercel deployment
 
-No deployment has been made yet. This page is a procedure, not deployment evidence. Consult STATUS.md for the latest observed result.
+The user confirmed that pushes to `main` deploy automatically to the connected Vercel project.
 
-The user requested Vercel and eventually `learn.drvelu.com`. Do not modify the main drvelu.com site or its DNS. First deploy to Vercel's generated URL and verify it.
+- Git remote: `https://github.com/Velu2k03/learnbycodex.git`
+- Production: `https://learnbycodex.vercel.app`
+- Baseline supplied by the user: `2e9767b`, deployment `learnbycodex-ge1sg44ew-velus-projects-27f81f38.vercel.app`, Ready.
+- Homepage HTTP 200 independently observed on 2 October 2026. See STATUS.md for the latest release verification.
 
-## Authenticate on F:
+## Release procedure
 
-In PowerShell, from `F:\Codes\Learn`:
+1. Source `scripts/env.ps1` to keep tooling/cache/temp on F:.
+2. Run `scripts/check.ps1` and relevant runtime/API checks. Record browser QA separately; a build is not interaction testing.
+3. Inspect `git status`, remote URL, and current remote `main`. Preserve other changes and history. Never force push.
+4. Commit reviewed changes, integrate into main, then push `origin main`.
+5. Verify GitHub received the commit and Vercel serves new artifacts. Inspect public GitHub deployment status when available. Record failures or pending deployment explicitly.
 
-```powershell
-.\scripts\vercel.ps1 -Action login
-```
+No separate Vercel login, new project, paid integration, database, or DNS change is needed for this workflow. The existing `scripts/vercel.ps1` is only for future CLI work; it stores configuration on F: and is not the normal release path.
 
-Complete the official Vercel sign-in in your browser. Do not paste passwords or API tokens into chat or source files. The script uses `.local/vercel-config` for CLI authentication and configuration, and F: for its cache/temp. That directory is ignored by Git and Vercel uploads.
+Keep `.local`, `.next`, `node_modules`, `.env`, and authentication files out of Git. Current application features require no server secrets. Do not change the main `drvelu.com` site. A future `learn.drvelu.com` subdomain is a separate task.
 
-Verify which account is connected:
-
-```powershell
-.\scripts\vercel.ps1 -Action whoami
-```
-
-Choose the correct personal account/team and a new project called `drvelu-ai-engineering-lab`. Do not link to an unrelated existing site. If multiple teams are available and the intended one is unclear, ask the user which one to use.
-
-## Validate and deploy
-
-```powershell
-.\scripts\check.ps1
-.\scripts\vercel.ps1 -Action deploy
-```
-
-Use the root directory and Next.js framework defaults. Keep `.local`, `node_modules`, `.next`, `.env` files, and auth artifacts out of uploads. `.vercelignore` excludes local tools/cache. No API secrets or database variables are required for milestone 1.
-
-The current script creates a preview deployment. After it returns the actual URL:
-
-```powershell
-.\scripts\vercel.ps1 -Action inspect -DeploymentUrl 'https://ACTUAL-RETURNED-URL.vercel.app'
-```
-
-Replace the placeholder with the returned URL. Confirm Ready/success and check the deployed page. Record the project, deployment URL, validation, and access/protection state in STATUS.md. Production promotion/custom domain is a subsequent explicit step; never claim deployment simply because the local build passed.
-
-## Important boundaries
-
-- Browser-local progress remains local after deployment. It is not PostgreSQL or cloud sync.
-- Public GitHub checks are unauthenticated and can hit GitHub's shared rate limit on Vercel. The UI should report this rather than fabricate missing evidence.
-- This release contains authored hints, not a live AI tutor.
-- This release contains no personal resume history or private learner notes in source.
-- [Vercel login documentation](https://vercel.com/docs/cli/login) and [global options](https://vercel.com/docs/cli/global-options) explain the official login and config-directory controls.
+Progress and code drafts remain browser-local. Deployment does not upload learner notes, create accounts, or provide cross-device sync. Export backups regularly, with F: selected as the browser download destination.

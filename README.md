@@ -19,6 +19,8 @@ The development scripts use the portable Node runtime in `.local/`, with npm cac
 - Personal dashboard with one next mission and a gentle daily target.
 - Six original missions: developer environment, Git/GitHub, Python, problem solving, web fundamentals, and HTTP/APIs.
 - Short lessons, practice/hints, debugging, build checklists, five-question checkpoints, evidence notes, and reflection.
+- In-browser CodeMirror editor, Python and SQLite workers, HTML/JavaScript preview, and a clearly simulated Git/PowerShell terminal.
+- Progressive stuck help and executed Python challenges with individual test feedback. These are local practice checks, not proctored credentials.
 - Nineteen-level roadmap; advanced levels are explicitly planned, not completed courses.
 - Browser-local progress with validated backups. Readable/invalid saves are treated separately; bad data is preserved for recovery. Multiple-tab updates pause saving to avoid stale overwrites.
 - Public GitHub repository metadata checks with fixed-host requests and timeouts. No OAuth or ownership verification.
@@ -28,7 +30,7 @@ The development scripts use the portable Node runtime in `.local/`, with npm cac
 
 ## Not yet implemented
 
-PostgreSQL/authentication/cloud sync, live AI tutoring, GitHub OAuth, sandboxed practical code execution, deep repository/project evaluation, full advanced courses, credential verification, and a complete customized resume engine. No third-party course has been imported; original teaching lives in the site, with licensed-source records and external links.
+PostgreSQL/authentication/cloud sync, live AI tutoring, GitHub OAuth, server-isolated code execution, deep repository/project evaluation, full advanced courses, credential verification, and a complete customized resume engine. Browser runners are for practice, not a hardened server assessment system. No third-party course has been imported; original teaching lives in the site, with licensed-source records and external links.
 
 ## Validation
 
@@ -38,11 +40,11 @@ PostgreSQL/authentication/cloud sync, live AI tutoring, GitHub OAuth, sandboxed 
 node .\scripts\validate-skills.mjs
 ```
 
-Tests cover completion gates, score recalculation, backups, URL validation, evidence sanitization, and GitHub success/failure paths. See `docs/STATUS.md` for checks actually run and known limitations. A production build does not prove browser interaction correctness.
+Checks include ESLint, regression tests, TypeScript, and a production build. Tests cover completion gates, score recalculation, backup rollback, draft validation, preview policy ordering, request restrictions, evidence sanitization, and GitHub success/failure paths. See `docs/PRODUCTION-AUDIT.md` for optional real runtime smoke tests and `docs/STATUS.md` for checks actually run. A production build does not prove browser interaction correctness.
 
 ## Deployment
 
-This is a standard Next.js application for Vercel. `vercel.json` sets the framework. No secret is required for the current milestone. Import the source through your own GitHub/Vercel account or use the local CLI instructions in `docs/DEPLOYMENT.md` when available. Never commit `.local`, `.next`, `node_modules`, `.env` files, or CLI auth files.
+The existing GitHub remote deploys `main` automatically to [learnbycodex.vercel.app](https://learnbycodex.vercel.app). `vercel.json` sets the Next.js framework. No secret is required for the current milestone. Follow `docs/DEPLOYMENT.md`; do not create another Vercel project. Never commit `.local`, `.next`, `node_modules`, `.env` files, or CLI auth files.
 
 Personal progress stays in your browser even when the app is hosted. The app code may be public, but no learner notes are seeded or uploaded by deployment. Export backups and choose F: as your browser download destination. Hosting does not provide cloud sync.
 

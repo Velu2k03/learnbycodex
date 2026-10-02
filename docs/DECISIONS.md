@@ -14,6 +14,9 @@ Last updated: 2026-10-02 (Asia/Manila).
 - For future authenticated cross-device progress storage, prefer Supabase's free tier. Keep Vercel as the app host; Cloudflare domain/DNS access does not change that hosting choice.
 - Strictly use F: for the project, tools, downloads, package cache, and temporary build files. Initial runtime files downloaded before this instruction were moved from C: to F:.
 - Keep recoverable project skills, notes, plan, checklist, completed work, and next actions so another agent can resume after an interruption.
+- Existing GitHub `main` automatically deploys to the connected Vercel project. The user confirmed this connection on 2 October 2026; use it rather than creating another project or requesting CLI login.
+- For this audit, the user chose to connect a browser rather than install Playwright. Do not install a test browser unless they change that preference.
+- Use multiple agents for independent review; keep edits coordinated in the shared checkout.
 
 ## Implementation choices for milestone 1
 
@@ -41,7 +44,7 @@ Last updated: 2026-10-02 (Asia/Manila).
 
 ## Outstanding external dependencies
 
-- Vercel account authentication is not configured in this session. No deployment exists yet.
-- GitHub remote/account selection is not configured. Do not create or push to a guessed account.
+- Existing remote is `https://github.com/Velu2k03/learnbycodex.git`; production is `https://learnbycodex.vercel.app`. Root and remote main were observed at `2e9767b` before the audit. The production homepage returned HTTP 200 on 2 October 2026.
+- The existing Git integration handles deployment authentication. A CLI login would only be needed for a separate CLI operation, which this release does not require.
 - No API provider secrets, database URL, or OAuth secrets have been supplied.
 - No resume, employment history, or education details have been supplied.

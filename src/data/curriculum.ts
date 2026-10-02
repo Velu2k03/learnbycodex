@@ -1,154 +1,750 @@
 import type { Mission } from "@/lib/types";
 
-export const roles = ["AI Engineer", "AI Platform Engineer", "AI Automation Engineer", "Forward Deployed Engineer", "AI Solutions Engineer", "Machine Learning Engineer", "AI Security Engineer"];
+export const roles = [
+  "AI Engineer",
+  "AI Platform Engineer",
+  "AI Automation Engineer",
+  "Forward Deployed Engineer",
+  "AI Solutions Engineer",
+  "Machine Learning Engineer",
+  "AI Security Engineer",
+];
 export const levels = [
-  ["Your developer workspace", "Make your editor, terminal, and tools feel familiar.", "Foundations"],
-  ["Git & GitHub", "Save your work and tell the story of what you build.", "Foundations"],
-  ["Python fundamentals", "Turn small ideas into working programs.", "Foundations"],
-  ["Programming & problem solving", "Break a problem into steps you can test.", "Foundations"],
-  ["The web: HTML, CSS & JavaScript", "Build interfaces that people can use.", "Foundations"],
-  ["HTTP, APIs & JSON", "Connect programs to the outside world.", "Foundations"],
-  ["Backend development", "Build validated services with FastAPI.", "Software engineering"],
-  ["SQL & PostgreSQL", "Model, store, and query application data.", "Software engineering"],
-  ["Testing & code quality", "Make changes with evidence that they work.", "Software engineering"],
-  ["Linux, Docker & containers", "Package an application and its environment.", "Software engineering"],
-  ["Cloud & deployment", "Ship, observe, and maintain a real service.", "Software engineering"],
-  ["Generative AI", "Understand tokens, prompts, costs, and evaluations.", "AI engineering"],
-  ["RAG & retrieval", "Retrieve useful context and verify citations.", "AI engineering"],
-  ["AI agents & automation", "Connect a model to tools and useful workflows.", "AI engineering"],
-  ["Agent orchestration", "Coordinate agents with durable state and human review.", "AI engineering"],
-  ["AI security", "Test prompt injection, data boundaries, and tool permissions.", "Production & career"],
-  ["Production AI systems", "Route, monitor, and budget model traffic.", "Production & career"],
-  ["Portfolio engineering", "Turn working systems into clear project evidence.", "Production & career"],
-  ["Resume & career readiness", "Describe demonstrated work honestly for your target role.", "Production & career"],
+  [
+    "Your developer workspace",
+    "Make your editor, terminal, and tools feel familiar.",
+    "Foundations",
+  ],
+  [
+    "Git & GitHub",
+    "Save your work and tell the story of what you build.",
+    "Foundations",
+  ],
+  [
+    "Python fundamentals",
+    "Turn small ideas into working programs.",
+    "Foundations",
+  ],
+  [
+    "Programming & problem solving",
+    "Break a problem into steps you can test.",
+    "Foundations",
+  ],
+  [
+    "The web: HTML, CSS & JavaScript",
+    "Build interfaces that people can use.",
+    "Foundations",
+  ],
+  [
+    "HTTP, APIs & JSON",
+    "Connect programs to the outside world.",
+    "Foundations",
+  ],
+  [
+    "Backend development",
+    "Build validated services with FastAPI.",
+    "Software engineering",
+  ],
+  [
+    "SQL & PostgreSQL",
+    "Model, store, and query application data.",
+    "Software engineering",
+  ],
+  [
+    "Testing & code quality",
+    "Make changes with evidence that they work.",
+    "Software engineering",
+  ],
+  [
+    "Linux, Docker & containers",
+    "Package an application and its environment.",
+    "Software engineering",
+  ],
+  [
+    "Cloud & deployment",
+    "Ship, observe, and maintain a real service.",
+    "Software engineering",
+  ],
+  [
+    "Generative AI",
+    "Understand tokens, prompts, costs, and evaluations.",
+    "AI engineering",
+  ],
+  [
+    "RAG & retrieval",
+    "Retrieve useful context and verify citations.",
+    "AI engineering",
+  ],
+  [
+    "AI agents & automation",
+    "Connect a model to tools and useful workflows.",
+    "AI engineering",
+  ],
+  [
+    "Agent orchestration",
+    "Coordinate agents with durable state and human review.",
+    "AI engineering",
+  ],
+  [
+    "AI security",
+    "Test prompt injection, data boundaries, and tool permissions.",
+    "Production & career",
+  ],
+  [
+    "Production AI systems",
+    "Route, monitor, and budget model traffic.",
+    "Production & career",
+  ],
+  [
+    "Portfolio engineering",
+    "Turn working systems into clear project evidence.",
+    "Production & career",
+  ],
+  [
+    "Resume & career readiness",
+    "Describe demonstrated work honestly for your target role.",
+    "Production & career",
+  ],
 ];
 
 export const missions: Mission[] = [
   {
-    id: "your-first-workspace", level: 0, title: "Meet your browser workshop", subtitle: "Your first small win: an editor, a console, and a program that runs here.", skill: "Developer tools", minutes: 60,
-    objectives: ["Understand what the editor, terminal, and runtime each do", "Edit and read a sample project file in this browser", "Understand where Git and Python fit in a coding workflow"],
-    lesson: [
-      { title: "Three tools. Three different jobs.", body: "The editor is where you write code. The terminal is where you enter commands. A runtime, such as Python, runs a program. This learning lab keeps these tools together in the browser. Its guided terminal is a simulation; it cannot access your computer." },
-      { title: "A project is a folder of work", body: "A project groups related files. In this browser lab, sample files and your saved code live in a workspace just for learning. Your drafts stay in this browser and are not automatically published to GitHub." },
-      { title: "Know where a command runs", body: "A real terminal uses a current folder. This lesson uses a guided simulation with sample files, so commands cannot install software, change your computer, or publish anything. The Python tab runs real Python in a separate browser worker." },
+    id: "your-first-workspace",
+    level: 0,
+    title: "Meet your browser workshop",
+    subtitle:
+      "Your first small win: an editor, a console, and a program that runs here.",
+    skill: "Developer tools",
+    minutes: 60,
+    objectives: [
+      "Understand what the editor, terminal, and runtime each do",
+      "Edit and read a sample project file in this browser",
+      "Understand where Git and Python fit in a coding workflow",
     ],
-    code: "# Guided terminal simulation: sample data only\nGet-Location\nGet-ChildItem\nGet-Content hello.txt\ngit status\npy --version", language: "PowerShell",
-    practice: { prompt: "Your terminal is in F:\\Projects, but hello.txt is inside F:\\Projects\\ai-learning-lab. Write the PowerShell command to enter that project folder.", answer: ["set-location .\\ai-learning-lab", "cd .\\ai-learning-lab", "cd ai-learning-lab", "set-location ai-learning-lab", "cd f:\\projects\\ai-learning-lab", "set-location f:\\projects\\ai-learning-lab"], explanation: "Set-Location changes the current folder. The .\\ prefix means a folder inside your current location. cd is a shorter alias.", hints: ["You need to change your current folder, not move the file.", "PowerShell's Set-Location command takes a folder path.", "Try Set-Location .\\ai-learning-lab"] },
-    debug: { code: "PS F:\\Projects> Get-Content hello.txt\nCannot find path 'F:\\Projects\\hello.txt'", question: "The sample file exists in ai-learning-lab. What would you inspect first?", explanation: "In a real terminal, inspect the current folder and its files. In this lab, use Get-Location and Get-ChildItem to rehearse; this simulation cannot read or change your computer." },
-    tasks: ["Create F:\\Projects\\ai-learning-lab and open the folder in VS Code", "Create hello.txt, write your sentence, and save it", "Open Terminal → New Terminal and read hello.txt with Get-Content", "Check Git and Python versions; install missing tools from their official sites on F:", "Create a learning-log.md file and record the commands that worked"],
+    lesson: [
+      {
+        title: "Three tools. Three different jobs.",
+        body: "The editor is where you write code. The terminal is where you enter commands. A runtime, such as Python, runs a program. This learning lab keeps these tools together in the browser. Its guided terminal is a simulation; it cannot access your computer.",
+      },
+      {
+        title: "A project is a folder of work",
+        body: "A project groups related files. In this browser lab, sample files and your saved code live in a workspace just for learning. Your drafts stay in this browser and are not automatically published to GitHub.",
+      },
+      {
+        title: "Know where a command runs",
+        body: "A real terminal uses a current folder. This lesson uses a guided simulation with sample files, so commands cannot install software, change your computer, or publish anything. The Python tab runs real Python in a separate browser worker.",
+      },
+    ],
+    code: "# Guided terminal simulation: sample data only\nGet-Location\nGet-ChildItem\nGet-Content hello.txt\ngit status\npy --version",
+    language: "PowerShell",
+    practice: {
+      prompt:
+        "Your terminal is in F:\\Projects, but hello.txt is inside F:\\Projects\\ai-learning-lab. Write the PowerShell command to enter that project folder.",
+      answer: [
+        "set-location .\\ai-learning-lab",
+        "cd .\\ai-learning-lab",
+        "cd ai-learning-lab",
+        "set-location ai-learning-lab",
+        "cd f:\\projects\\ai-learning-lab",
+        "set-location f:\\projects\\ai-learning-lab",
+      ],
+      explanation:
+        "Set-Location changes the current folder. The .\\ prefix means a folder inside your current location. cd is a shorter alias.",
+      hints: [
+        "You need to change your current folder, not move the file.",
+        "PowerShell's Set-Location command takes a folder path.",
+        "Try Set-Location .\\ai-learning-lab",
+      ],
+    },
+    debug: {
+      code: "PS F:\\Projects> Get-Content hello.txt\nCannot find path 'F:\\Projects\\hello.txt'",
+      question:
+        "The sample file exists in ai-learning-lab. What would you inspect first?",
+      explanation:
+        "In a real terminal, inspect the current folder and its files. In this lab, use Get-Location and Get-ChildItem to rehearse; this simulation cannot read or change your computer.",
+    },
+    tasks: [
+      "Create F:\\Projects\\ai-learning-lab and open the folder in VS Code",
+      "Create hello.txt, write your sentence, and save it",
+      "Open Terminal → New Terminal and read hello.txt with Get-Content",
+      "Check Git and Python versions; install missing tools from their official sites on F:",
+      "Create a learning-log.md file and record the commands that worked",
+    ],
     quiz: [
-      { prompt: "What does Get-Location show?", options: ["Your current terminal folder", "Your GitHub account", "Your Python version"], answer: 0, explanation: "Commands run relative to the terminal's current folder." },
-      { prompt: "Your terminal prints an old version of your sentence. What should you check first?", options: ["Buy a faster laptop", "Save the file and confirm its path", "Delete the project"], answer: 1, explanation: "The terminal reads the saved file at the path you supplied." },
-      { prompt: "Which tool executes a .py program?", options: ["A README", "GitHub", "The Python runtime"], answer: 2, explanation: "Your editor writes the program; Python executes it." },
-      { prompt: "Get-ChildItem is useful for…", options: ["Publishing your app", "Listing items in a folder", "Creating a Git commit"], answer: 1, explanation: "Listing items helps you check that the file is really there." },
-      { prompt: "Your first setup command fails. What is a useful next step?", options: ["Read the error and check the current folder", "Assume you cannot code", "Reinstall every application"], answer: 0, explanation: "An error provides information. Check one small assumption at a time." },
+      {
+        prompt: "What does Get-Location show?",
+        options: [
+          "Your current terminal folder",
+          "Your GitHub account",
+          "Your Python version",
+        ],
+        answer: 0,
+        explanation: "Commands run relative to the terminal's current folder.",
+      },
+      {
+        prompt:
+          "Your terminal prints an old version of your sentence. What should you check first?",
+        options: [
+          "Buy a faster laptop",
+          "Save the file and confirm its path",
+          "Delete the project",
+        ],
+        answer: 1,
+        explanation:
+          "The terminal reads the saved file at the path you supplied.",
+      },
+      {
+        prompt: "Which tool executes a .py program?",
+        options: ["A README", "GitHub", "The Python runtime"],
+        answer: 2,
+        explanation: "Your editor writes the program; Python executes it.",
+      },
+      {
+        prompt: "Get-ChildItem is useful for…",
+        options: [
+          "Publishing your app",
+          "Listing items in a folder",
+          "Creating a Git commit",
+        ],
+        answer: 1,
+        explanation:
+          "Listing items helps you check that the file is really there.",
+      },
+      {
+        prompt: "Your first setup command fails. What is a useful next step?",
+        options: [
+          "Read the error and check the current folder",
+          "Assume you cannot code",
+          "Reinstall every application",
+        ],
+        answer: 0,
+        explanation:
+          "An error provides information. Check one small assumption at a time.",
+      },
     ],
     boss: "Without copying the commands above, use the guided terminal to inspect the sample folder and explain how a real terminal would find a file.",
-    reflection: "Which part was confusing: the editor, the folder, or the terminal? What did you check to make it work?", resources: ["vscode", "python", "git"],
+    reflection:
+      "Which part was confusing: the editor, the folder, or the terminal? What did you check to make it work?",
+    resources: ["vscode", "python", "git"],
   },
   {
-    id: "your-first-repository", level: 1, title: "Give your project a history", subtitle: "Create your first repository and publish a learning log.", skill: "Git & GitHub", minutes: 60,
-    objectives: ["Explain save, stage, commit, and push", "Make two meaningful commits", "Publish a repository with a useful README"],
-    lesson: [
-      { title: "A history you control", body: "Git records selected snapshots of your files. Each snapshot is a commit with a message describing the change. Git works on your computer. GitHub hosts a copy online so you can share your work." },
-      { title: "Save → stage → commit → push", body: "Saving updates the file on disk. Staging chooses which current changes belong in the next snapshot. Committing records that snapshot locally. Pushing sends your commits to GitHub. These are four separate actions." },
-      { title: "Make your work understandable", body: "Create README.md with your learning goal, what the folder contains, and how to use it. Before a commit, inspect git diff --cached. Stage only the files you intend to publish. Keep passwords, tokens, and .env files out of your repository." },
+    id: "your-first-repository",
+    level: 1,
+    title: "Give your project a history",
+    subtitle: "Create your first repository and publish a learning log.",
+    skill: "Git & GitHub",
+    minutes: 60,
+    objectives: [
+      "Explain save, stage, commit, and push",
+      "Make two meaningful commits",
+      "Publish a repository with a useful README",
     ],
-    code: "git init\ngit status\ngit add README.md hello.txt\ngit diff --cached\ngit commit -m \"Start my AI engineering learning log\"\n\n# After creating an empty repository on GitHub:\ngit branch -M main\ngit remote add origin YOUR_REPOSITORY_URL\ngit push -u origin main", language: "PowerShell",
-    practice: { prompt: "You saved README.md. Which command stages its current contents for your next commit?", answer: ["git add readme.md", "git add ./readme.md", "git add .\\readme.md"], explanation: "git add selects the file's current contents for the next commit. It does not publish anything.", hints: ["Staging happens before committing.", "The command is git add followed by the filename.", "git add README.md"] },
-    debug: { code: "git add README.md\n# Then you edit and save another sentence.\ngit commit -m \"Explain my learning goal\"", question: "Will that last sentence be included in this commit?", explanation: "No. Staging captured the earlier contents. Inspect git diff and run git add README.md again before committing if the new sentence belongs in the snapshot." },
-    tasks: ["Create a README describing your goal and project files", "Initialize Git, inspect your staged changes, and create the first commit", "Add a learning note and make a second descriptive commit", "Create an empty GitHub repository and push using its actual URL", "Open the repository on GitHub and confirm the README and both commits are visible"],
+    lesson: [
+      {
+        title: "A history you control",
+        body: "Git records selected snapshots of your files. Each snapshot is a commit with a message describing the change. Git works on your computer. GitHub hosts a copy online so you can share your work.",
+      },
+      {
+        title: "Save → stage → commit → push",
+        body: "Saving updates the file on disk. Staging chooses which current changes belong in the next snapshot. Committing records that snapshot locally. Pushing sends your commits to GitHub. These are four separate actions.",
+      },
+      {
+        title: "Make your work understandable",
+        body: "Create README.md with your learning goal, what the folder contains, and how to use it. Before a commit, inspect git diff --cached. Stage only the files you intend to publish. Keep passwords, tokens, and .env files out of your repository.",
+      },
+    ],
+    code: 'git init\ngit status\ngit add README.md hello.txt\ngit diff --cached\ngit commit -m "Start my AI engineering learning log"\n\n# After creating an empty repository on GitHub:\ngit branch -M main\ngit remote add origin YOUR_REPOSITORY_URL\ngit push -u origin main',
+    language: "PowerShell",
+    practice: {
+      prompt:
+        "You saved README.md. Which command stages its current contents for your next commit?",
+      answer: [
+        "git add readme.md",
+        "git add ./readme.md",
+        "git add .\\readme.md",
+      ],
+      explanation:
+        "git add selects the file's current contents for the next commit. It does not publish anything.",
+      hints: [
+        "Staging happens before committing.",
+        "The command is git add followed by the filename.",
+        "git add README.md",
+      ],
+    },
+    debug: {
+      code: 'git add README.md\n# Then you edit and save another sentence.\ngit commit -m "Explain my learning goal"',
+      question: "Will that last sentence be included in this commit?",
+      explanation:
+        "No. Staging captured the earlier contents. Inspect git diff and run git add README.md again before committing if the new sentence belongs in the snapshot.",
+    },
+    tasks: [
+      "Create a README describing your goal and project files",
+      "Initialize Git, inspect your staged changes, and create the first commit",
+      "Add a learning note and make a second descriptive commit",
+      "Create an empty GitHub repository and push using its actual URL",
+      "Open the repository on GitHub and confirm the README and both commits are visible",
+    ],
     quiz: [
-      { prompt: "What does git add do?", options: ["Publishes your project", "Stages selected contents", "Creates a branch"], answer: 1, explanation: "Staging selects what will go in your next commit." },
-      { prompt: "You made a commit while offline. Where is it?", options: ["In your local repository", "Automatically on GitHub", "Only in VS Code memory"], answer: 0, explanation: "Git commits locally. Push updates the remote." },
-      { prompt: "Which message best explains a commit?", options: ["stuff", "final final", "Add Python setup instructions"], answer: 2, explanation: "A descriptive message helps a future reader understand the change." },
-      { prompt: "What belongs in a README?", options: ["Your API secret", "Setup steps and what the project does", "Your account password"], answer: 1, explanation: "A README is for understanding and running a project. Secrets do not belong in it." },
-      { prompt: "Which command shows your recent commits?", options: ["git log --oneline", "git add", "git init"], answer: 0, explanation: "git log displays recorded history." },
+      {
+        prompt: "What does git add do?",
+        options: [
+          "Publishes your project",
+          "Stages selected contents",
+          "Creates a branch",
+        ],
+        answer: 1,
+        explanation: "Staging selects what will go in your next commit.",
+      },
+      {
+        prompt: "You made a commit while offline. Where is it?",
+        options: [
+          "In your local repository",
+          "Automatically on GitHub",
+          "Only in VS Code memory",
+        ],
+        answer: 0,
+        explanation: "Git commits locally. Push updates the remote.",
+      },
+      {
+        prompt: "Which message best explains a commit?",
+        options: ["stuff", "final final", "Add Python setup instructions"],
+        answer: 2,
+        explanation:
+          "A descriptive message helps a future reader understand the change.",
+      },
+      {
+        prompt: "What belongs in a README?",
+        options: [
+          "Your API secret",
+          "Setup steps and what the project does",
+          "Your account password",
+        ],
+        answer: 1,
+        explanation:
+          "A README is for understanding and running a project. Secrets do not belong in it.",
+      },
+      {
+        prompt: "Which command shows your recent commits?",
+        options: ["git log --oneline", "git add", "git init"],
+        answer: 0,
+        explanation: "git log displays recorded history.",
+      },
     ],
     boss: "Create a new file called next-steps.md, make a descriptive commit, and push it without following the tutorial. Explain how you confirmed it reached GitHub.",
-    reflection: "Explain save, stage, commit, and push using your own repository. What would a recruiter need to understand it in 30 seconds?", resources: ["gitmastery", "freecodecamp"],
+    reflection:
+      "Explain save, stage, commit, and push using your own repository. What would a recruiter need to understand it in 30 seconds?",
+    resources: ["gitmastery", "freecodecamp"],
   },
   {
-    id: "python-focus-planner", level: 2, title: "Build a tiny focus planner", subtitle: "Turn your daily time budget into a useful Python program.", skill: "Python", minutes: 60,
-    objectives: ["Convert input from text to a number", "Use integer division, remainder, and conditions", "Check normal, boundary, and invalid inputs"],
-    lesson: [
-      { title: "Input → transform → output", body: "A program can receive information, transform it, and return a useful result. Python's input() always returns text. int() converts suitable text into a whole number so you can calculate with it." },
-      { title: "Count blocks, keep the remainder", body: "The // operator counts complete groups. The % operator gives the remainder. With 60 minutes and 25-minute blocks, 60 // 25 is 2 and 60 % 25 is 10. Predict these values before running the program." },
-      { title: "Teach your program what is valid", body: "An if statement selects behavior based on a condition. Negative time does not make sense here, so handle it explicitly. Test 60, 24, 0, and -5 separately. Typing hello will still raise ValueError; handling text that is not a number is your optional next improvement." },
+    id: "python-focus-planner",
+    level: 2,
+    title: "Build a tiny focus planner",
+    subtitle: "Turn your daily time budget into a useful Python program.",
+    skill: "Python",
+    minutes: 60,
+    objectives: [
+      "Convert input from text to a number",
+      "Use integer division, remainder, and conditions",
+      "Check normal, boundary, and invalid inputs",
     ],
-    code: "minutes = int(input(\"Minutes available today? \"))\nblock = 25\n\nif minutes < 0:\n    print(\"Enter zero or a positive number.\")\nelse:\n    blocks = minutes // block\n    leftover = minutes % block\n    print(f\"Focus blocks: {blocks}\")\n    print(f\"Minutes left: {leftover}\")", language: "Python · focus.py",
-    practice: { prompt: "With minutes = 85 and block = 25, what are blocks and leftover? Enter two numbers separated by a comma.", answer: ["3,10", "3, 10"], explanation: "Three blocks use 75 minutes. 85 minus 75 leaves 10 minutes.", hints: ["How many complete groups of 25 fit inside 85?", "3 × 25 = 75. Subtract that from 85.", "3, 10"] },
-    debug: { code: "minutes = input(\"Minutes? \")\nprint(minutes // 25)", question: "Why does Python raise a TypeError here?", explanation: "input() returns text, even when you type digits. Use int(input(\"Minutes? \")) before numerical division. Conversion can fail for non-numeric input, so handle that in a later improvement." },
-    tasks: ["Create focus.py and type the program into your editor", "Predict and record results before running py focus.py", "Test 60, 24, 0, and -5; save the real output for each", "Change the block size to 15 and test again", "Commit the program and document how to run it in your README"],
+    lesson: [
+      {
+        title: "Input → transform → output",
+        body: "A program can receive information, transform it, and return a useful result. Python's input() always returns text. int() converts suitable text into a whole number so you can calculate with it.",
+      },
+      {
+        title: "Count blocks, keep the remainder",
+        body: "The // operator counts complete groups. The % operator gives the remainder. With 60 minutes and 25-minute blocks, 60 // 25 is 2 and 60 % 25 is 10. Predict these values before running the program.",
+      },
+      {
+        title: "Teach your program what is valid",
+        body: "An if statement selects behavior based on a condition. Negative time does not make sense here, so handle it explicitly. Test 60, 24, 0, and -5 separately. Typing hello will still raise ValueError; handling text that is not a number is your optional next improvement.",
+      },
+    ],
+    code: 'minutes = int(input("Minutes available today? "))\nblock = 25\n\nif minutes < 0:\n    print("Enter zero or a positive number.")\nelse:\n    blocks = minutes // block\n    leftover = minutes % block\n    print(f"Focus blocks: {blocks}")\n    print(f"Minutes left: {leftover}")',
+    language: "Python · focus.py",
+    practice: {
+      prompt:
+        "With minutes = 85 and block = 25, what are blocks and leftover? Enter two numbers separated by a comma.",
+      answer: ["3,10", "3, 10"],
+      explanation:
+        "Three blocks use 75 minutes. 85 minus 75 leaves 10 minutes.",
+      hints: [
+        "How many complete groups of 25 fit inside 85?",
+        "3 × 25 = 75. Subtract that from 85.",
+        "3, 10",
+      ],
+    },
+    debug: {
+      code: 'minutes = input("Minutes? ")\nprint(minutes // 25)',
+      question: "Why does Python raise a TypeError here?",
+      explanation:
+        'input() returns text, even when you type digits. Use int(input("Minutes? ")) before numerical division. Conversion can fail for non-numeric input, so handle that in a later improvement.',
+    },
+    tasks: [
+      "Create focus.py and type the program into your editor",
+      "Predict and record results before running py focus.py",
+      "Test 60, 24, 0, and -5; save the real output for each",
+      "Change the block size to 15 and test again",
+      "Commit the program and document how to run it in your README",
+    ],
     quiz: [
-      { prompt: "What type does input() return?", options: ["Text", "Always an integer", "Always a decimal"], answer: 0, explanation: "Convert text explicitly before numerical operations." },
-      { prompt: "What is 60 % 25?", options: ["2", "10", "25"], answer: 1, explanation: "Two complete groups use 50, leaving 10." },
-      { prompt: "Why test 0 and -5?", options: ["To make the code longer", "To avoid documentation", "To check boundaries and invalid input"], answer: 2, explanation: "Typical inputs alone can hide wrong assumptions." },
-      { prompt: "What is 24 // 25?", options: ["1", "0", "24"], answer: 1, explanation: "No complete 25-minute block fits in 24 minutes." },
-      { prompt: "Why indent the lines after else?", options: ["To define the block of code that belongs to else", "Only for decoration", "To convert input"], answer: 0, explanation: "Indentation is part of Python's syntax." },
+      {
+        prompt: "What type does input() return?",
+        options: ["Text", "Always an integer", "Always a decimal"],
+        answer: 0,
+        explanation: "Convert text explicitly before numerical operations.",
+      },
+      {
+        prompt: "What is 60 % 25?",
+        options: ["2", "10", "25"],
+        answer: 1,
+        explanation: "Two complete groups use 50, leaving 10.",
+      },
+      {
+        prompt: "Why test 0 and -5?",
+        options: [
+          "To make the code longer",
+          "To avoid documentation",
+          "To check boundaries and invalid input",
+        ],
+        answer: 2,
+        explanation: "Typical inputs alone can hide wrong assumptions.",
+      },
+      {
+        prompt: "What is 24 // 25?",
+        options: ["1", "0", "24"],
+        answer: 1,
+        explanation: "No complete 25-minute block fits in 24 minutes.",
+      },
+      {
+        prompt: "Why indent the lines after else?",
+        options: [
+          "To define the block of code that belongs to else",
+          "Only for decoration",
+          "To convert input",
+        ],
+        answer: 0,
+        explanation: "Indentation is part of Python's syntax.",
+      },
     ],
     boss: "Build a reading planner: accept a page count and pages per session, then report full sessions and leftover pages. Guard against a zero session size.",
-    reflection: "What did you predict correctly? What surprised you? Explain why converting the input fixed the debugging exercise.", resources: ["python", "project-based"],
+    reflection:
+      "What did you predict correctly? What surprised you? Explain why converting the input fixed the debugging exercise.",
+    resources: ["python", "project-based"],
   },
   {
-    id: "python-task-tracker", level: 3, title: "Make a learning task tracker", subtitle: "Practice small functions, lists, and useful tests.", skill: "Problem solving", minutes: 60,
-    objectives: ["Split a problem into a function", "Filter a list without changing the original", "Test an empty input and a mixed input"],
-    lesson: [
-      { title: "Describe the behavior first", body: "We need a list of tasks that are not finished. Before coding, write an example: two tasks, one done and one not done, should return only the unfinished task. This gives you a specific result to test." },
-      { title: "A function has a small job", body: "A function names a repeatable operation. pending_tasks receives a list, loops through it, and collects tasks whose done value is False. return sends the result back to the caller. A new result list leaves the original unchanged." },
-      { title: "Check your assumptions", body: "An assertion compares an actual result with an expected one. An empty list should return an empty list. An all-done list should also return an empty list. These tests help you change your code without breaking its behavior." },
+    id: "python-task-tracker",
+    level: 3,
+    title: "Make a learning task tracker",
+    subtitle: "Practice small functions, lists, and useful tests.",
+    skill: "Problem solving",
+    minutes: 60,
+    objectives: [
+      "Split a problem into a function",
+      "Filter a list without changing the original",
+      "Test an empty input and a mixed input",
     ],
-    code: "def pending_tasks(tasks):\n    result = []\n    for task in tasks:\n        if not task[\"done\"]:\n            result.append(task[\"title\"])\n    return result\n\ntasks = [\n    {\"title\": \"Learn lists\", \"done\": True},\n    {\"title\": \"Build tracker\", \"done\": False},\n]\nassert pending_tasks([]) == []\nassert pending_tasks(tasks) == [\"Build tracker\"]\nprint(pending_tasks(tasks))", language: "Python · tasks.py",
-    practice: { prompt: "What is the length of pending_tasks(tasks) for the two tasks in this example?", answer: ["1", "one"], explanation: "Only Build tracker has done set to False.", hints: ["Look at each task's done value.", "True means completed; False means still pending.", "Only one task remains, so the answer is 1."] },
-    debug: { code: "for task in tasks:\n    if not task[\"done\"]:\n        result.append(task[\"title\"])\n    return result", question: "What happens if return is inside the loop?", explanation: "The function stops after the first iteration. Place return after the loop, at the function's indentation level, so every task is checked." },
-    tasks: ["Create tasks.py and run the example", "Add three real learning tasks", "Write assertions for empty, mixed, and all-done lists", "Explain the function's input and output in the README", "Commit the code and the passing test output"],
+    lesson: [
+      {
+        title: "Describe the behavior first",
+        body: "We need a list of tasks that are not finished. Before coding, write an example: two tasks, one done and one not done, should return only the unfinished task. This gives you a specific result to test.",
+      },
+      {
+        title: "A function has a small job",
+        body: "A function names a repeatable operation. pending_tasks receives a list, loops through it, and collects tasks whose done value is False. return sends the result back to the caller. A new result list leaves the original unchanged.",
+      },
+      {
+        title: "Check your assumptions",
+        body: "An assertion compares an actual result with an expected one. An empty list should return an empty list. An all-done list should also return an empty list. These tests help you change your code without breaking its behavior.",
+      },
+    ],
+    code: 'def pending_tasks(tasks):\n    result = []\n    for task in tasks:\n        if not task["done"]:\n            result.append(task["title"])\n    return result\n\ntasks = [\n    {"title": "Learn lists", "done": True},\n    {"title": "Build tracker", "done": False},\n]\nassert pending_tasks([]) == []\nassert pending_tasks(tasks) == ["Build tracker"]\nprint(pending_tasks(tasks))',
+    language: "Python · tasks.py",
+    practice: {
+      prompt:
+        "What is the length of pending_tasks(tasks) for the two tasks in this example?",
+      answer: ["1", "one"],
+      explanation: "Only Build tracker has done set to False.",
+      hints: [
+        "Look at each task's done value.",
+        "True means completed; False means still pending.",
+        "Only one task remains, so the answer is 1.",
+      ],
+    },
+    debug: {
+      code: 'for task in tasks:\n    if not task["done"]:\n        result.append(task["title"])\n    return result',
+      question: "What happens if return is inside the loop?",
+      explanation:
+        "The function stops after the first iteration. Place return after the loop, at the function's indentation level, so every task is checked.",
+    },
+    tasks: [
+      "Create tasks.py and run the example",
+      "Add three real learning tasks",
+      "Write assertions for empty, mixed, and all-done lists",
+      "Explain the function's input and output in the README",
+      "Commit the code and the passing test output",
+    ],
     quiz: [
-      { prompt: "What does return do?", options: ["Sends a value back and exits the function", "Repeats the loop", "Publishes the code"], answer: 0, explanation: "Code after an executed return does not run in that function call." },
-      { prompt: "Why test an empty list?", options: ["It is always an error", "It is a valid boundary case", "It proves every case"], answer: 1, explanation: "There may be no tasks yet." },
-      { prompt: "What does append do?", options: ["Deletes the list", "Sorts the list", "Adds an item to the end"], answer: 2, explanation: "append changes the list by adding one item." },
-      { prompt: "A useful function usually…", options: ["Has one clear responsibility", "Does everything in the program", "Requires a network"], answer: 0, explanation: "A focused function is easier to understand and test." },
-      { prompt: "An assertion fails. What should you inspect?", options: ["Only the font", "The expected result, actual result, and input", "Nothing"], answer: 1, explanation: "Either your code or your expectation can be wrong." },
-    ], boss: "Add a completed_count function and tests without copying pending_tasks. Explain how you handled an empty list.", reflection: "How did writing a concrete example before coding help? What bug would your tests catch?", resources: ["freecodecamp", "project-based"],
+      {
+        prompt: "What does return do?",
+        options: [
+          "Sends a value back and exits the function",
+          "Repeats the loop",
+          "Publishes the code",
+        ],
+        answer: 0,
+        explanation:
+          "Code after an executed return does not run in that function call.",
+      },
+      {
+        prompt: "Why test an empty list?",
+        options: [
+          "It is always an error",
+          "It is a valid boundary case",
+          "It proves every case",
+        ],
+        answer: 1,
+        explanation: "There may be no tasks yet.",
+      },
+      {
+        prompt: "What does append do?",
+        options: [
+          "Deletes the list",
+          "Sorts the list",
+          "Adds an item to the end",
+        ],
+        answer: 2,
+        explanation: "append changes the list by adding one item.",
+      },
+      {
+        prompt: "A useful function usually…",
+        options: [
+          "Has one clear responsibility",
+          "Does everything in the program",
+          "Requires a network",
+        ],
+        answer: 0,
+        explanation: "A focused function is easier to understand and test.",
+      },
+      {
+        prompt: "An assertion fails. What should you inspect?",
+        options: [
+          "Only the font",
+          "The expected result, actual result, and input",
+          "Nothing",
+        ],
+        answer: 1,
+        explanation: "Either your code or your expectation can be wrong.",
+      },
+    ],
+    boss: "Add a completed_count function and tests without copying pending_tasks. Explain how you handled an empty list.",
+    reflection:
+      "How did writing a concrete example before coding help? What bug would your tests catch?",
+    resources: ["freecodecamp", "project-based"],
   },
   {
-    id: "first-project-page", level: 4, title: "Give your project a home", subtitle: "Build a simple web page with a useful interaction.", skill: "Web basics", minutes: 60,
-    objectives: ["Separate content, appearance, and behavior", "Use a semantic button and a click handler", "Make a page readable on a small screen"],
-    lesson: [
-      { title: "Three layers of a page", body: "HTML describes the content and its meaning. CSS controls appearance. JavaScript adds behavior. A heading should be an h1, and an action should be a button so keyboard users can activate it too." },
-      { title: "Start with one interaction", body: "Our page counts completed focus sessions. A variable holds the count. A click handler increases it and updates textContent. Using textContent treats the value as text rather than inserting HTML." },
-      { title: "Check it on a narrow window", body: "Use the viewport meta tag and a fluid width with a maximum size. Test your page with the keyboard: Tab to the button, then press Enter. A page that only works with a mouse is not finished." },
+    id: "first-project-page",
+    level: 4,
+    title: "Give your project a home",
+    subtitle: "Build a simple web page with a useful interaction.",
+    skill: "Web basics",
+    minutes: 60,
+    objectives: [
+      "Separate content, appearance, and behavior",
+      "Use a semantic button and a click handler",
+      "Make a page readable on a small screen",
     ],
-    code: "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>My focus log</title>\n  <style>body { font: 18px system-ui; max-width: 640px; margin: 40px auto; padding: 20px; }</style>\n</head>\n<body>\n  <h1>My focus log</h1>\n  <p id=\"count\" aria-live=\"polite\">0 sessions completed</p>\n  <button id=\"done\">Finish a session</button>\n  <script>\n    let sessions = 0;\n    document.querySelector('#done').addEventListener('click', () => {\n      sessions += 1;\n      document.querySelector('#count').textContent = `${sessions} sessions completed`;\n    });\n  </script>\n</body>\n</html>", language: "HTML · index.html",
-    practice: { prompt: "The count starts at 0. The button runs sessions += 1. What is sessions after three clicks?", answer: ["3", "three"], explanation: "Each click adds one. This variable stays in memory until you refresh the page.", hints: ["Trace one click at a time.", "The values go 0 → 1 → 2 → …", "3"] },
-    debug: { code: "document.querySelector('#missing').textContent = 'Done';", question: "Why does this fail when no element has id=missing?", explanation: "querySelector returns null if no element matches. Check the ID and run the script after the HTML exists." },
-    tasks: ["Create index.html and open it in your browser", "Change the title and introduction to describe your learning project", "Add the button interaction and test three clicks", "Test the button with Tab and Enter, and resize the window", "Commit the page with a screenshot and explain that refresh resets the count"],
+    lesson: [
+      {
+        title: "Three layers of a page",
+        body: "HTML describes the content and its meaning. CSS controls appearance. JavaScript adds behavior. A heading should be an h1, and an action should be a button so keyboard users can activate it too.",
+      },
+      {
+        title: "Start with one interaction",
+        body: "Our page counts completed focus sessions. A variable holds the count. A click handler increases it and updates textContent. Using textContent treats the value as text rather than inserting HTML.",
+      },
+      {
+        title: "Check it on a narrow window",
+        body: "Use the viewport meta tag and a fluid width with a maximum size. Test your page with the keyboard: Tab to the button, then press Enter. A page that only works with a mouse is not finished.",
+      },
+    ],
+    code: '<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>My focus log</title>\n  <style>body { font: 18px system-ui; max-width: 640px; margin: 40px auto; padding: 20px; }</style>\n</head>\n<body>\n  <h1>My focus log</h1>\n  <p id="count" aria-live="polite">0 sessions completed</p>\n  <button id="done">Finish a session</button>\n  <script>\n    let sessions = 0;\n    document.querySelector(\'#done\').addEventListener(\'click\', () => {\n      sessions += 1;\n      document.querySelector(\'#count\').textContent = `${sessions} sessions completed`;\n    });\n  </script>\n</body>\n</html>',
+    language: "HTML · index.html",
+    practice: {
+      prompt:
+        "The count starts at 0. The button runs sessions += 1. What is sessions after three clicks?",
+      answer: ["3", "three"],
+      explanation:
+        "Each click adds one. This variable stays in memory until you refresh the page.",
+      hints: ["Trace one click at a time.", "The values go 0 → 1 → 2 → …", "3"],
+    },
+    debug: {
+      code: "document.querySelector('#missing').textContent = 'Done';",
+      question: "Why does this fail when no element has id=missing?",
+      explanation:
+        "querySelector returns null if no element matches. Check the ID and run the script after the HTML exists.",
+    },
+    tasks: [
+      "Create index.html and open it in your browser",
+      "Change the title and introduction to describe your learning project",
+      "Add the button interaction and test three clicks",
+      "Test the button with Tab and Enter, and resize the window",
+      "Commit the page with a screenshot and explain that refresh resets the count",
+    ],
     quiz: [
-      { prompt: "Which layer describes content?", options: ["HTML", "CSS", "Git"], answer: 0, explanation: "HTML provides structure and meaning." },
-      { prompt: "Which element is best for a clickable action?", options: ["A div with no keyboard handler", "A button", "A paragraph"], answer: 1, explanation: "Buttons have built-in keyboard and accessibility behavior." },
-      { prompt: "What happens to our count on refresh?", options: ["It stays forever", "It uploads to GitHub", "It resets to zero"], answer: 2, explanation: "This example has no persistent storage." },
-      { prompt: "What does CSS control?", options: ["Appearance and layout", "Git commits", "Python execution"], answer: 0, explanation: "CSS styles the HTML elements." },
-      { prompt: "Why use textContent for a text result?", options: ["It runs Python", "It inserts text without parsing HTML", "It saves a database"], answer: 1, explanation: "Text output does not need HTML interpretation." },
-    ], boss: "Add a reset button and make the output say 1 session for a count of one. Test both controls with the keyboard.", reflection: "Explain the jobs of HTML, CSS, and JavaScript using your own page. What would be needed to remember the count?", resources: ["freecodecamp", "build-your-own"],
+      {
+        prompt: "Which layer describes content?",
+        options: ["HTML", "CSS", "Git"],
+        answer: 0,
+        explanation: "HTML provides structure and meaning.",
+      },
+      {
+        prompt: "Which element is best for a clickable action?",
+        options: ["A div with no keyboard handler", "A button", "A paragraph"],
+        answer: 1,
+        explanation:
+          "Buttons have built-in keyboard and accessibility behavior.",
+      },
+      {
+        prompt: "What happens to our count on refresh?",
+        options: [
+          "It stays forever",
+          "It uploads to GitHub",
+          "It resets to zero",
+        ],
+        answer: 2,
+        explanation: "This example has no persistent storage.",
+      },
+      {
+        prompt: "What does CSS control?",
+        options: ["Appearance and layout", "Git commits", "Python execution"],
+        answer: 0,
+        explanation: "CSS styles the HTML elements.",
+      },
+      {
+        prompt: "Why use textContent for a text result?",
+        options: [
+          "It runs Python",
+          "It inserts text without parsing HTML",
+          "It saves a database",
+        ],
+        answer: 1,
+        explanation: "Text output does not need HTML interpretation.",
+      },
+    ],
+    boss: "Add a reset button and make the output say 1 session for a count of one. Test both controls with the keyboard.",
+    reflection:
+      "Explain the jobs of HTML, CSS, and JavaScript using your own page. What would be needed to remember the count?",
+    resources: ["freecodecamp", "build-your-own"],
   },
   {
-    id: "first-api-client", level: 5, title: "Build a GitHub API client", subtitle: "Fetch real data, handle errors, and make it useful.", skill: "HTTP & APIs", minutes: 60,
-    objectives: ["Explain requests, status codes, and JSON", "Fetch public repository data with Python", "Handle a missing repository without crashing"],
-    lesson: [
-      { title: "An API is a conversation", body: "A client sends an HTTP request to a URL. The server responds with a status code and a body. GET requests read data. A 200 response usually means success; 404 means the resource was not found. Always check the response, not just the happy path." },
-      { title: "JSON carries structured data", body: "JSON represents objects, arrays, strings, numbers, booleans, and null. Python's json.load converts a JSON response into Python values, such as a dictionary. Then you can read fields by name." },
-      { title: "Make failure useful", body: "The example uses Python's standard library, a timeout, and separate HTTP and network error handling. Public GitHub requests have rate limits. Do not send repeated requests in a fast loop. Tokens belong in environment variables, never source files." },
+    id: "first-api-client",
+    level: 5,
+    title: "Build a GitHub API client",
+    subtitle: "Fetch real data, handle errors, and make it useful.",
+    skill: "HTTP & APIs",
+    minutes: 60,
+    objectives: [
+      "Explain requests, status codes, and JSON",
+      "Fetch public repository data with Python",
+      "Handle a missing repository without crashing",
     ],
-    code: "import json\nfrom urllib.request import Request, urlopen\nfrom urllib.error import HTTPError, URLError\n\nurl = 'https://api.github.com/repos/microsoft/ai-agents-for-beginners'\nrequest = Request(url, headers={'User-Agent': 'velu-learning-client'})\ntry:\n    with urlopen(request, timeout=10) as response:\n        repo = json.load(response)\n    print(repo['full_name'])\n    print(repo['description'])\nexcept HTTPError as error:\n    print(f'Server returned HTTP {error.code}')\nexcept URLError:\n    print('Could not connect. Check your network and try later.')", language: "Python · api_client.py",
-    practice: { prompt: "A request for a repository that does not exist returns which common HTTP status code?", answer: ["404", "404 not found"], explanation: "404 means the requested resource was not found. A private resource may also return 404 to an unauthenticated client.", hints: ["200 is success; 500 is a server error.", "You may have seen this code on a missing web page.", "404"] },
-    debug: { code: "repo = '{\"name\": \"learning-lab\"}'\nprint(repo['name'])", question: "Why can you not read name from this value?", explanation: "repo is a JSON string, not a dictionary. Parse it with json.loads(repo) first. json.load reads from a file-like object; json.loads reads a string." },
-    tasks: ["Create api_client.py and fetch the example repository", "Replace the URL with your own public repository URL in API form", "Print the repository name, description, and primary language", "Test a nonexistent repository and record the resulting status", "Commit the client with setup steps, sample output, and error-handling notes"],
+    lesson: [
+      {
+        title: "An API is a conversation",
+        body: "A client sends an HTTP request to a URL. The server responds with a status code and a body. GET requests read data. A 200 response usually means success; 404 means the resource was not found. Always check the response, not just the happy path.",
+      },
+      {
+        title: "JSON carries structured data",
+        body: "JSON represents objects, arrays, strings, numbers, booleans, and null. Python's json.load converts a JSON response into Python values, such as a dictionary. Then you can read fields by name.",
+      },
+      {
+        title: "Make failure useful",
+        body: "The example uses Python's standard library, a timeout, and separate HTTP and network error handling. Public GitHub requests have rate limits. Do not send repeated requests in a fast loop. Tokens belong in environment variables, never source files.",
+      },
+    ],
+    code: "import json\nfrom urllib.request import Request, urlopen\nfrom urllib.error import HTTPError, URLError\n\nurl = 'https://api.github.com/repos/microsoft/ai-agents-for-beginners'\nrequest = Request(url, headers={'User-Agent': 'velu-learning-client'})\ntry:\n    with urlopen(request, timeout=10) as response:\n        repo = json.load(response)\n    print(repo['full_name'])\n    print(repo['description'])\nexcept HTTPError as error:\n    print(f'Server returned HTTP {error.code}')\nexcept URLError:\n    print('Could not connect. Check your network and try later.')",
+    language: "Python · api_client.py",
+    practice: {
+      prompt:
+        "A request for a repository that does not exist returns which common HTTP status code?",
+      answer: ["404", "404 not found"],
+      explanation:
+        "404 means the requested resource was not found. A private resource may also return 404 to an unauthenticated client.",
+      hints: [
+        "200 is success; 500 is a server error.",
+        "You may have seen this code on a missing web page.",
+        "404",
+      ],
+    },
+    debug: {
+      code: "repo = '{\"name\": \"learning-lab\"}'\nprint(repo['name'])",
+      question: "Why can you not read name from this value?",
+      explanation:
+        "repo is a JSON string, not a dictionary. Parse it with json.loads(repo) first. json.load reads from a file-like object; json.loads reads a string.",
+    },
+    tasks: [
+      "Create api_client.py and fetch the example repository",
+      "Replace the URL with your own public repository URL in API form",
+      "Print the repository name, description, and primary language",
+      "Test a nonexistent repository and record the resulting status",
+      "Commit the client with setup steps, sample output, and error-handling notes",
+    ],
     quiz: [
-      { prompt: "Which method typically reads data?", options: ["GET", "DELETE", "PATCH"], answer: 0, explanation: "GET retrieves a representation of a resource." },
-      { prompt: "A 404 response means…", options: ["Everything succeeded", "The resource was not found", "The computer is broken"], answer: 1, explanation: "Check the URL and whether you have access." },
-      { prompt: "Why set a timeout?", options: ["To remove errors", "To increase the rate limit", "To avoid waiting indefinitely"], answer: 2, explanation: "A slow dependency should not hold your program forever." },
-      { prompt: "Where should API secrets live?", options: ["Environment variables or a secret manager", "A public README", "A Git commit"], answer: 0, explanation: "Keep credentials out of published files." },
-      { prompt: "What does parsing JSON do?", options: ["Deploys a server", "Converts serialized data into usable values", "Creates an API token"], answer: 1, explanation: "Parsing gives you dictionaries and lists you can inspect." },
-    ], boss: "Extend the client to show open issues for your repository. Explain pagination and what you would do if GitHub returned a rate-limit error.", reflection: "What could fail outside your code? How did your program make that failure understandable?", resources: ["nextwork", "microsoft-genai"],
+      {
+        prompt: "Which method typically reads data?",
+        options: ["GET", "DELETE", "PATCH"],
+        answer: 0,
+        explanation: "GET retrieves a representation of a resource.",
+      },
+      {
+        prompt: "A 404 response means…",
+        options: [
+          "Everything succeeded",
+          "The resource was not found",
+          "The computer is broken",
+        ],
+        answer: 1,
+        explanation: "Check the URL and whether you have access.",
+      },
+      {
+        prompt: "Why set a timeout?",
+        options: [
+          "To remove errors",
+          "To increase the rate limit",
+          "To avoid waiting indefinitely",
+        ],
+        answer: 2,
+        explanation: "A slow dependency should not hold your program forever.",
+      },
+      {
+        prompt: "Where should API secrets live?",
+        options: [
+          "Environment variables or a secret manager",
+          "A public README",
+          "A Git commit",
+        ],
+        answer: 0,
+        explanation: "Keep credentials out of published files.",
+      },
+      {
+        prompt: "What does parsing JSON do?",
+        options: [
+          "Deploys a server",
+          "Converts serialized data into usable values",
+          "Creates an API token",
+        ],
+        answer: 1,
+        explanation:
+          "Parsing gives you dictionaries and lists you can inspect.",
+      },
+    ],
+    boss: "Extend the client to show open issues for your repository. Explain pagination and what you would do if GitHub returned a rate-limit error.",
+    reflection:
+      "What could fail outside your code? How did your program make that failure understandable?",
+    resources: ["nextwork", "microsoft-genai"],
   },
 ];
-export const missionById = (id: string) => missions.find(mission => mission.id === id);
+export const missionById = (id: string) =>
+  missions.find((mission) => mission.id === id);

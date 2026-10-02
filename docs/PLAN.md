@@ -21,16 +21,17 @@ Checked means implemented; the validation section in STATUS.md says what was act
 - [x] Finish public GitHub evidence endpoint and portfolio UI.
 - [x] Finish role mappings and an honest evidence-based career/resume draft.
 - [x] Write README and F:-only start/check scripts.
-- [ ] Finish F:-only deployment script and account handoff.
+- [x] Record the existing GitHub-to-Vercel deployment path; no separate CLI login is needed.
 - [x] Pin dependency versions and preserve lockfile.
-- [x] Run meaningful logic tests (17 passed) and TypeScript check.
+- [x] Run meaningful logic tests (27 passed) and TypeScript check.
 - [x] Run production build after browser workbench, CSP, and curriculum updates.
 - [x] Verify browser Python input, SQLite queries, public GitHub API reads, worker CSP, and responsive no-overflow layout.
 - [x] Check implemented page routes (14 HTTP 200 responses).
 - [ ] Check real GitHub endpoint responses (mocked failure cases passed).
 - [x] Validate project-local skill frontmatter and independently test the resumption workflow.
 - [ ] Record final known limitations and exact next actions.
-- [ ] Publish on Vercel after account authentication is available; verify deployment URL.
+- [x] Verify existing production homepage responds at learnbycodex.vercel.app.
+- [ ] Publish the production-audit release through existing main branch integration and verify new artifacts.
 - [ ] Add Supabase authentication and row-level secured cloud progress sync after a project is configured.
 
 ## Milestone 2 — durable personal platform (not started)

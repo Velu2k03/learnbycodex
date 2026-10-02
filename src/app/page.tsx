@@ -1,31 +1,382 @@
 "use client";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, ArrowUpRight, BookOpen, Check, ChevronRight, Clock3, Code2, Flag, GitBranch, Leaf, Play, Sparkles, Target, Terminal } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Check,
+  ChevronRight,
+  Clock3,
+  Code2,
+  Flag,
+  GitBranch,
+  Leaf,
+  Play,
+  Sparkles,
+  Target,
+  Terminal,
+} from "lucide-react";
 import { useLab } from "@/components/lab-provider";
 import { Badge, PageHeading, ProgressBar } from "@/components/ui";
 import { currentMission, emptyProgress, requirements } from "@/lib/progress";
 import { missions } from "@/data/curriculum";
 export default function Dashboard() {
-  const { state, ready } = useLab(); const reducedMotion = useReducedMotion(); const mission = currentMission(state); const progress = state.missions[mission.id] ?? emptyProgress();
-  const completed = missions.filter(m => state.missions[m.id]?.completedAt).length; const checks = requirements(mission, progress); const percent = Math.round(checks.filter(c => c.done).length / checks.length * 100);
+  const { state, ready } = useLab();
+  const reducedMotion = useReducedMotion();
+  const mission = currentMission(state);
+  const progress = state.missions[mission.id] ?? emptyProgress();
+  const completed = missions.filter(
+    (m) => state.missions[m.id]?.completedAt,
+  ).length;
+  const checks = requirements(mission, progress);
+  const percent = Math.round(
+    (checks.filter((c) => c.done).length / checks.length) * 100,
+  );
   const allDone = completed === missions.length;
-  return <div className="page dashboard"><PageHeading eyebrow="A LITTLE PROGRESS, EVERY DAY" title={`Let’s build something, ${state.profile.name}.`} description="One clear mission. A little learning. Something you can call your own."><Link href="/settings" className="daily-target"><Clock3 size={17}/>{state.profile.dailyMinutes} min daily target</Link></PageHeading>
-    <div className="workspace-grid"><section className="main-column">
-      <motion.article className="mission-hero" initial={reducedMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : .35 }}>
-        <div className="hero-top"><span className="hero-label"><span className="pulse-dot"/>{allDone ? "STARTER PATH COMPLETE" : "YOUR NEXT SMALL WIN"}</span><span className="hero-number">0{mission.level + 1} / 06</span></div>
-        <div className="hero-content"><div className="hero-copy"><Badge tone="lime">LEVEL {mission.level} · {mission.skill.toUpperCase()}</Badge><h2>{allDone ? "Look at what you’ve built." : mission.title}</h2><p>{allDone ? "Six foundations missions, with work to show for them. Review your evidence and choose your next project." : mission.subtitle}</p><div className="hero-meta"><span><Clock3 size={15}/>{mission.minutes} min · pause anytime</span><span><Code2 size={16}/>Hands-on mission</span></div><Link href={allDone ? "/portfolio" : `/mission/${mission.id}`} className="button lime-button"><Play size={16} fill="currentColor"/>{allDone ? "Review my work" : percent > 0 ? "Continue my mission" : "Start my mission"}<ArrowRight size={18}/></Link></div>
-        <div className="terminal-card" aria-label="Preview of your first learning log"><div className="terminal-toolbar"><i/><i/><i/><span>your-next-step.txt</span><Terminal size={13}/></div><div className="terminal-body"><span className="code-comment"># Your engineering journey</span><p><span className="code-lime">you</span> = <span className="code-string">"a builder in progress"</span></p><p><span className="code-lime">today</span> = <span className="code-string">"one small win"</span></p><div className="terminal-output"><span>❯</span> learn. build. repeat.<span className="cursor"/></div></div><div className="terminal-foot"><span className="status-dot"/>No experience required. Just curiosity.</div></div></div>
-        <div className="hero-progress"><span>{ready ? percent : 0}% of this mission complete</span><div><span style={{ width: `${percent}%` }}/></div><span>Your pace. Your progress.</span></div>
-      </motion.article>
-      <section className="session-section"><div className="section-heading"><h2>A plan for your next hour</h2><span>Less scrolling. More doing.</span></div><div className="session-grid">{[
-        {icon:BookOpen,n:"01",title:"Understand",time:"10 min",text:"A short lesson with a clear example.",className:"blue"},
-        {icon:Code2,n:"02",title:"Try it yourself",time:"15 min",text:"Practice, make mistakes, use hints.",className:"peach"},
-        {icon:GitBranch,n:"03",title:"Build & prove",time:"35 min",text:"Make it work. Test it. Save your evidence.",className:"green"},
-      ].map(item=><Link href={`/mission/${mission.id}`} className="session-card" key={item.n}><div className="session-top"><span className={`icon-tile ${item.className}`}><item.icon size={21}/></span><span className="step-number">{item.n}</span></div><div className="session-title"><h3>{item.title}</h3><span>{item.time}</span></div><p>{item.text}</p><ArrowUpRight className="session-arrow" size={16}/></Link>)}</div></section>
-      <section className="path-preview"><div className="section-heading"><h2>Your foundation, one step at a time</h2><Link href="/roadmap" className="text-link">Full learning path<ArrowRight size={16}/></Link></div><div className="path-list">{missions.slice(0,3).map((m,i)=>{const done=!!state.missions[m.id]?.completedAt; const active=m.id===mission.id;return <Link href={`/mission/${m.id}`} key={m.id} className={`path-row ${active?"current":""}`}><span className={`path-index ${done?"done":""}`}>{done?<Check size={18}/>:String(i+1).padStart(2,"0")}</span><div><small>LEVEL {m.level}</small><h3>{m.title}</h3></div><Badge tone={done?"green":active?"lime":"neutral"}>{done?"Completed":active?"Up next":"Preview available"}</Badge><ChevronRight size={17}/></Link>})}</div></section>
-    </section><aside className="right-column"><section className="card journey-card"><div className="card-heading"><span className="icon-tile green"><Target size={20}/></span><h2>Your direction</h2></div><span className="small-label">PRIMARY FOCUS</span><h3>{state.profile.role}</h3><p className="muted">Build the foundations first. Your specializations grow from there.</p><div className="role-chips"><span>AI Platform</span><span>AI Automation</span></div><div className="divider"/><div className="progress-caption"><strong>Your starter path</strong><span>{completed} of {missions.length}</span></div><ProgressBar value={completed/missions.length*100} label="Starter missions completed"/><p className="microcopy">{completed===0?"Your first completed mission starts the story.":`${completed} real step${completed===1?"":"s"} forward. Keep going.`}</p><Link href="/career" className="text-link">Explore my direction<ArrowUpRight size={15}/></Link></section>
-      <section className="card outcome-card"><span className="small-label">TODAY’S TAKEAWAY</span><span className="outcome-icon"><Flag size={23}/></span><h3>A working project folder.</h3><p>Something small, real, and ready for your first line of code.</p><div className="outcome-proof"><Check size={16}/>A saved file<Check size={16}/>A learning log</div></section>
-      <section className="gentle-note"><Leaf size={20}/><div><strong>A slower day still counts.</strong><p>Do 10 minutes. Save your place. Come back when you’re ready.</p></div></section>
-    </aside></div><div className="bottom-strip"><Sparkles size={18}/><span>You’re building toward real projects: <strong>Hybrid RAG · Agent orchestration · LLM gateway</strong></span><Link href="/projects">Meet your future projects<ArrowRight size={16}/></Link></div></div>;
+  const next = missions[mission.level + 1];
+  const outcomes = [
+    "A working project folder.",
+    "A repository with a clear history.",
+    "A focus planner you can run.",
+    "A tested task-tracking function.",
+    "A web page with a real interaction.",
+    "An API client that handles errors.",
+  ];
+  const recent = state.evidence.at(-1);
+  const certificatesStarted = Object.values(state.certificates).filter(
+    (c) => c.status !== "Not started",
+  ).length;
+  const pathStart = Math.max(
+    0,
+    Math.min(mission.level - 1, missions.length - 3),
+  );
+  return (
+    <div className="page dashboard">
+      <PageHeading
+        eyebrow="A LITTLE PROGRESS, EVERY DAY"
+        title={`Let’s build something, ${state.profile.name}.`}
+        description="One clear mission. A little learning. Something you can call your own."
+      >
+        <Link href="/settings" className="daily-target">
+          <Clock3 size={17} />
+          {state.profile.dailyMinutes} min daily target
+        </Link>
+      </PageHeading>
+      <div className="workspace-grid">
+        <section className="main-column">
+          <motion.article
+            className="mission-hero"
+            initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.35 }}
+          >
+            <div className="hero-top">
+              <span className="hero-label">
+                <span className="pulse-dot" />
+                {allDone ? "STARTER PATH COMPLETE" : "TODAY’S MISSION"}
+              </span>
+              <span className="hero-number">0{mission.level + 1} / 06</span>
+            </div>
+            <div className="hero-content">
+              <div className="hero-copy">
+                <Badge tone="lime">
+                  LEVEL {mission.level} · {mission.skill.toUpperCase()}
+                </Badge>
+                <h2>
+                  {allDone ? "Look at what you’ve built." : mission.title}
+                </h2>
+                <p>
+                  {allDone
+                    ? "Six foundations missions, with work to show for them. Review your evidence and choose your next project."
+                    : mission.subtitle}
+                </p>
+                <div className="hero-meta">
+                  <span>
+                    <Clock3 size={15} />
+                    {mission.minutes} min · pause anytime
+                  </span>
+                  <span>
+                    <Code2 size={16} />
+                    Hands-on mission
+                  </span>
+                </div>
+                <Link
+                  href={allDone ? "/portfolio" : `/mission/${mission.id}`}
+                  className="button lime-button"
+                >
+                  <Play size={16} fill="currentColor" />
+                  {allDone
+                    ? "Review my work"
+                    : percent > 0
+                      ? "Continue my mission"
+                      : "Start my mission"}
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+              <div
+                className="terminal-card"
+                aria-label="Preview of your first learning log"
+              >
+                <div className="terminal-toolbar">
+                  <i />
+                  <i />
+                  <i />
+                  <span>your-next-step.txt</span>
+                  <Terminal size={13} />
+                </div>
+                <div className="terminal-body">
+                  <span className="code-comment">
+                    # Your engineering journey
+                  </span>
+                  <p>
+                    <span className="code-lime">you</span> ={" "}
+                    <span className="code-string">
+                      &quot;a builder in progress&quot;
+                    </span>
+                  </p>
+                  <p>
+                    <span className="code-lime">today</span> ={" "}
+                    <span className="code-string">
+                      &quot;one small win&quot;
+                    </span>
+                  </p>
+                  <div className="terminal-output">
+                    <span>❯</span> learn. build. repeat.
+                    <span className="cursor" />
+                  </div>
+                </div>
+                <div className="terminal-foot">
+                  <span className="status-dot" />
+                  No experience required. Just curiosity.
+                </div>
+              </div>
+            </div>
+            <div className="hero-progress">
+              <span>{ready ? percent : 0}% of this mission complete</span>
+              <div>
+                <span style={{ width: `${percent}%` }} />
+              </div>
+              <span>Your pace. Your progress.</span>
+            </div>
+          </motion.article>
+          <section className="session-section">
+            <div className="section-heading">
+              <h2>A plan for your next {state.profile.dailyMinutes} minutes</h2>
+              <span>Less scrolling. More doing.</span>
+            </div>
+            <div className="session-grid">
+              {[
+                {
+                  icon: BookOpen,
+                  n: "01",
+                  title: "Understand",
+                  time: `${Math.round(state.profile.dailyMinutes * 0.2)} min`,
+                  text: "A short lesson with a clear example.",
+                  className: "blue",
+                },
+                {
+                  icon: Code2,
+                  n: "02",
+                  title: "Try it yourself",
+                  time: `${Math.round(state.profile.dailyMinutes * 0.3)} min`,
+                  text: "Practice, make mistakes, use hints.",
+                  className: "peach",
+                },
+                {
+                  icon: GitBranch,
+                  n: "03",
+                  title: "Build & prove",
+                  time: `${Math.round(state.profile.dailyMinutes * 0.5)} min`,
+                  text: "Make it work. Test it. Save your evidence.",
+                  className: "green",
+                },
+              ].map((item) => (
+                <Link
+                  href={`/mission/${mission.id}`}
+                  className="session-card"
+                  key={item.n}
+                >
+                  <div className="session-top">
+                    <span className={`icon-tile ${item.className}`}>
+                      <item.icon size={21} />
+                    </span>
+                    <span className="step-number">{item.n}</span>
+                  </div>
+                  <div className="session-title">
+                    <h3>{item.title}</h3>
+                    <span>{item.time}</span>
+                  </div>
+                  <p>{item.text}</p>
+                  <ArrowUpRight className="session-arrow" size={16} />
+                </Link>
+              ))}
+            </div>
+          </section>
+          <section className="path-preview">
+            <div className="section-heading">
+              <h2>Your foundation, one step at a time</h2>
+              <Link href="/roadmap" className="text-link">
+                Full learning path
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+            <div className="path-list">
+              {missions.slice(pathStart, pathStart + 3).map((m) => {
+                const done = !!state.missions[m.id]?.completedAt;
+                const active = m.id === mission.id;
+                return (
+                  <Link
+                    href={`/mission/${m.id}`}
+                    key={m.id}
+                    className={`path-row ${active ? "current" : ""}`}
+                  >
+                    <span className={`path-index ${done ? "done" : ""}`}>
+                      {done ? (
+                        <Check size={18} />
+                      ) : (
+                        String(m.level + 1).padStart(2, "0")
+                      )}
+                    </span>
+                    <div>
+                      <small>LEVEL {m.level}</small>
+                      <h3>{m.title}</h3>
+                    </div>
+                    <Badge tone={done ? "green" : active ? "lime" : "neutral"}>
+                      {done
+                        ? "Completed"
+                        : active
+                          ? "Up next"
+                          : "Preview available"}
+                    </Badge>
+                    <ChevronRight size={17} />
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        </section>
+        <aside className="right-column">
+          <section className="card journey-card">
+            <div className="card-heading">
+              <span className="icon-tile green">
+                <Target size={20} />
+              </span>
+              <h2>Your direction</h2>
+            </div>
+            <span className="small-label">PRIMARY FOCUS</span>
+            <h3>{state.profile.role}</h3>
+            <p className="muted">
+              Build the foundations first. Your specializations grow from there.
+            </p>
+            <div className="role-chips">
+              <span>AI Platform</span>
+              <span>AI Automation</span>
+            </div>
+            <div className="divider" />
+            <div className="progress-caption">
+              <strong>Your starter path</strong>
+              <span>
+                {completed} of {missions.length}
+              </span>
+            </div>
+            <ProgressBar
+              value={(completed / missions.length) * 100}
+              label="Starter missions completed"
+            />
+            <p className="microcopy">
+              {completed === 0
+                ? "Your first completed mission starts the story."
+                : `${completed} real step${completed === 1 ? "" : "s"} forward. Keep going.`}
+            </p>
+            <Link href="/career" className="text-link">
+              Explore my direction
+              <ArrowUpRight size={15} />
+            </Link>
+          </section>
+          <section className="card outcome-card">
+            <span className="small-label">TODAY’S TAKEAWAY</span>
+            <span className="outcome-icon">
+              <Flag size={23} />
+            </span>
+            <h3>
+              {allDone
+                ? "Six foundations you can explain."
+                : outcomes[mission.level]}
+            </h3>
+            <p>
+              {allDone
+                ? "Review your work and identify your next project gap."
+                : mission.objectives.at(-1)}
+            </p>
+            <div className="outcome-proof">
+              <Check size={16} />
+              Working evidence
+              <Check size={16} />
+              Your reflection
+            </div>
+          </section>
+          <section className="gentle-note">
+            <Leaf size={20} />
+            <div>
+              <strong>A slower day still counts.</strong>
+              <p>
+                Do 10 minutes. Save your place. Come back when you’re ready.
+              </p>
+            </div>
+          </section>
+        </aside>
+      </div>
+      <section className="dashboard-evidence" aria-label="Your next milestones">
+        <article>
+          <span className="small-label">NEXT MILESTONE</span>
+          <h3>{next?.title ?? "Review your starter portfolio"}</h3>
+          <Link
+            className="text-link"
+            href={next ? `/mission/${next.id}` : "/portfolio"}
+          >
+            See what comes next
+            <ArrowRight size={15} />
+          </Link>
+        </article>
+        <article>
+          <span className="small-label">RECENT GITHUB CHECK</span>
+          <h3>{recent?.name ?? "Your first repository awaits"}</h3>
+          <p>
+            {recent
+              ? `Latest observed commit ${recent.commit.slice(0, 7)}. Authorship is not verified.`
+              : "Publish your learning log, then save its evidence."}
+          </p>
+          <Link className="text-link" href="/portfolio">
+            Open portfolio
+            <ArrowRight size={15} />
+          </Link>
+        </article>
+        <article>
+          <span className="small-label">CERTIFICATION TRACKER</span>
+          <h3>
+            {certificatesStarted
+              ? `${certificatesStarted} learning paths started`
+              : "Skills first. Credentials next."}
+          </h3>
+          <p>Provider courses and official exams, when you’re ready.</p>
+          <Link className="text-link" href="/certifications">
+            Explore credentials
+            <ArrowRight size={15} />
+          </Link>
+        </article>
+      </section>
+      <div className="bottom-strip">
+        <Sparkles size={18} />
+        <span>
+          You’re building toward real projects:{" "}
+          <strong>Hybrid RAG · Agent orchestration · LLM gateway</strong>
+        </span>
+        <Link href="/projects">
+          Meet your future projects
+          <ArrowRight size={16} />
+        </Link>
+      </div>
+    </div>
+  );
 }

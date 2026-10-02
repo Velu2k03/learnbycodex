@@ -1,70 +1,54 @@
-# Current checkpoint — read this first
+﻿# Current checkpoint — read this first
 
-Updated: 2026-10-02 (Asia/Manila). Status: **browser workbench implemented and validated for Python, SQLite, and public GitHub reads; not deployed**.
+Updated: 2026-10-02 (Asia/Manila). Status: **production audit fixes implemented; final validation/release in progress; connected-browser QA pending**.
 
-## Where we are
+## Workspace and deployment
 
-Workspace: `F:\Codes\Learn`. Next.js source is in `src/`. The in-browser mission workbench includes a CodeMirror editor, console, HTML preview, Python/SQLite runtimes, local drafts, and beginner guidance. Vercel deployment remains pending authentication.
+- Workspace: `F:\Codes\Learn`. All new tooling, dependencies, caches, downloads, and temp artifacts stay on F:.
+- Repository: `https://github.com/Velu2k03/learnbycodex.git`.
+- Audit branch: `audit/production-ux-2026-10-02`, based on `2e9767b`. Check actual Git state before resuming.
+- Existing production: `https://learnbycodex.vercel.app`. Homepage returned HTTP 200 on 2 October 2026. User confirmed main pushes automatically deploy through the existing Vercel integration. Separate Vercel CLI login is unnecessary for this path.
+- Earlier notes claiming no deployment or no remote were stale and have been corrected.
 
-## Completed implementation
+## Implemented
 
-- Dashboard, sidebar, app shell, responsive styles, reduced-motion CSS.
-- Six original mission definitions with explanations, code, hints, debug tasks, builds, quizzes, evidence requirements, and reflection.
-- Mission UI, local progress/completion logic, quiz attempt recording.
-- In-browser CodeMirror workspace with HTML/CSS/JavaScript, Python, SQLite SQL, JSON, Markdown, and a clearly simulated PowerShell/Git terminal.
-- Browser Python and SQLite workers, sandboxed HTML preview, per-mission local editor drafts, Python input support, glossary, responsive animated UI, and a 45-second runtime stop.
-- Optional GitHub token field is memory-only; public API calls work without one and browser policy restricts requests to GitHub GET endpoints and runtime CDNs.
-- Nineteen-level roadmap (six ready; remaining levels explicitly planned).
-- Resource library with source/license information; certification center with six requested providers.
-- Three detailed original capstone briefs.
-- Backup parser and safe GitHub URL/evidence helpers.
-- Corrupt-data/multi-tab write guard added following an independent read-only review.
-- Two repository-local skills and persistent plan/decisions/checkpoint files.
-- Preferences, validated backup import/export, raw-data recovery download.
-- Public GitHub endpoint, portfolio metadata observations, career tracks, and a conservative project-evidence draft.
-- README, F:-only environment/dev/check scripts, 17 logic/integration-unit tests, and skill validator.
-- Dependencies pinned to installed versions; package-lock synchronized.
+- Existing six original missions, nineteen-level roadmap, resources, credentials tracker, capstone briefs, GitHub metadata checks, and honest career evidence draft remain.
+- Browser workbench: CodeMirror, Python, SQLite, HTML/JavaScript preview, JSON, Markdown, and explicitly simulated Git/PowerShell.
+- Runtime fixes: validate effective Request method; retry failed initialization; reject overlapping runs; Stop control; bounded output; retain preview across Console switches/logs; trusted preview CSP prefix.
+- Optional GitHub token entry removed. Independent review demonstrated that learner code can read a token sharing its runtime. Browser exercises now use unauthenticated public requests. The JavaScript helper is not a security boundary against adversarial learner code.
+- Editor drafts: preserve corrupt originals, report save failures, pause after cross-tab changes, guard pending debounce, flush on navigation/page hide, include drafts and damaged raw records in exports.
+- Backup restore reverses successful writes if storage quota fails. Independent quota reproduction verified originals survive.
+- Mobile navigation focus/inert/Escape behavior, all links close the menu, editor textbox label and Tab escape, readable text/contrast, responsive CSS, reduced-motion support.
+- Dashboard follows current mission and daily target; roadmap distinguishes ready work from unwritten levels; resources include honest difficulty/time/reuse metadata.
+- Progressive authored stuck-help dialog, three executed Python challenges, prerequisite explanation, accessible pass/fail feedback, and optional extension briefs.
+- Existing completed missions are preserved when upgrading older saves. New Python completions require their practical checks.
+- Lint tooling, regression tests, runtime smoke script, loading/error states, and persistent audit report.
 
-## Last observed checks
+## Validation evidence
 
-- npm installation: passed; 36 packages added; audit reported zero vulnerabilities at install time.
-- Node runtime: v24.21.0, checksum verified against official Node SHASUMS before extraction.
-- Runtime and original download moved to `.local/` on F: after user requested F:-only storage.
-- Development server session 29186 printed local URL `http://127.0.0.1:3000` and compiled dashboard.
-- HTTP GET `/`, `/roadmap`, `/resources`, `/projects`, `/certifications`, `/settings`, `/portfolio`, `/career`, and all six `/mission/...` pages: 200.
-- Browser checks: Python input `85` returned 3 blocks and 10 minutes left; SQLite starter query returned its two rows; public GitHub example fetched repository name and description.
-- Browser responsive check: no horizontal overflow at 1440px, 656px, or 390px. The runtime worker returned the configured CSP header.
-- HTML preview rendered. Script interaction inside the isolated iframe could not be verified in the integrated browser tool; do not count that interaction as validated.
-- `npm test`: 17/17 passed. Tests cover completion, score derivation, malformed backups, evidence sanitization, URL validation, and mocked GitHub success/failure paths.
-- `npm run typecheck`: passed.
-- `node scripts/validate-skills.mjs`: both project skills passed frontmatter and reference checks. The bundled Python skill validator was not run; a project-local Node check and independent behavioral forward-test were used.
-- Independent resumption test correctly recovered constraints, completed/unverified work, and next tasks from the skill and notes.
-- `npm run typecheck`: passed after browser workbench changes.
-- `npm test`: 17/17 passed after browser workbench changes.
-- `npm update --save`: completed; packages were already current within declared ranges.
-- `npm outdated --long`: no outdated packages reported. `npm audit --omit=dev`: zero vulnerabilities.
-- `npm run build`: passed after workbench, CSP, and curriculum updates.
-- Independent review prompted fixes for corrupt-save overwrite, unsafe evidence hydration, empty GitHub repo normalization, and multi-tab overwrite. Helpers have test coverage; browser storage event behavior still needs browser-level testing.
+- `scripts/check.ps1`: lint, 27 tests, TypeScript, and production build passed after final removal of token entry.
+- `scripts/smoke-runtimes.ts`: actual pinned Pyodide 0.27.7 and sql.js 1.13.0, running the worker source under Node. All three starters fail checks and valid solutions pass. Python input, failed-start retry, output cap, SQL rows/cap/subsequent mutation/error recovery passed. This is runtime integration testing, not browser testing.
+- `npm audit --omit=dev`: zero vulnerabilities.
+- `node scripts/validate-skills.mjs`: both project skills passed.
+- Independent agents reviewed logic/security and UX/accessibility. Their concrete findings were addressed; no browser claims were inferred from source review.
+- Local API smoke initially failed with ECONNREFUSED because the earlier server was gone. Production server started at `http://127.0.0.1:3000` (retained session 1179); rerun passed: invalid URL 400, public Microsoft repository 200, README true, commit prefix `25b7985`.
+- All fourteen implemented pages returned HTTP 200. Missing missions use Next.js documented streaming behavior: HTTP 200 can accompany the not-found UI and noindex metadata. The smoke script checks those markers rather than incorrectly requiring 404 for streamed responses.
+- Browser inventory: no browser connected. User chose to connect one rather than install Playwright. Current visual, keyboard, refresh, multi-tab, and interactive preview checks remain unverified. Earlier milestone browser observations do not validate this release.
 
 ## Next exact actions
 
-1. Browser workbench commit `cc1748b` is pushed to `origin/main`.
-2. Finish F:-only Vercel deployment instructions/script using the installed CLI at `.local/vercel-tool` and an F: global config directory.
-3. Configure Supabase only after a project and authentication settings are available; never place keys in source or checkpoints.
-4. If Vercel authentication is available, deploy validated source and record the returned deployment URL and status. Do not claim publication before that.
+1. Final app checks and runtime smoke passed after token removal. Collect the full site smoke result including exact worker/policy artifacts and CSP.
+2. Existing production server is at `http://127.0.0.1:3000`; check it before starting another.
+3. If browser is connected, run the pending browser checklist in PRODUCTION-AUDIT.md. Otherwise report that limitation explicitly; do not invent screenshots or checks.
+4. Inspect diff/secrets/history, make logical commits, fast-forward main, push existing origin, and verify both GitHub and new Vercel artifacts.
+5. Update this checkpoint and the audit report with actual commit/deployment evidence.
 
-## Important unresolved details
+## Boundaries and recovery
 
-- Provider hints are authored, not AI-generated. No live tutor/API keys are configured.
-- Progress is browser-local, not PostgreSQL/cloud-backed.
-- Browser code runners currently cover Python, SQLite, and web preview. The OS terminal is simulated; other native runtimes and Supabase sync are not implemented.
-- URLs alone do not verify learning or repository ownership.
-- Planned levels are not full courses; do not imply all requested third-party content has been imported.
-- No Vercel credentials/CLI auth were found before the F:-only constraint. Do not inspect or write C: again for deployment; use F: CLI config if needed.
-- Next.js generated AGENTS.md/CLAUDE.md. AGENTS.md now includes user constraints and must be preserved.
-- Installed framework docs use `.md`, not `.mdx`.
-- The installed Lucide release has no `Github` export; use `GitFork` or a separately supported brand icon.
-
-## Resume discipline
-
-Treat this file as a checkpoint, not a guarantee. Verify the working tree and last command results. Update the checklist only after the corresponding work exists, and keep test outcomes separate from implementation status. Never store credentials in these notes.
+- Authored guidance is not a live AI tutor. Progress/drafts are browser-local; no database/auth/cloud sync.
+- Browser runtimes are practice tools, not proctored or hardened server assessment. A web infinite loop can freeze its browser context. Worker code can access JavaScript; never inject application secrets.
+- Public GitHub checks observe metadata, not ownership/authorship or skill. Shared API rate limits can apply.
+- Six levels have real starter missions; advanced curriculum is planned. Third-party courses remain linked unless reuse rights and notices are checked.
+- No personal employment/education/resume history has been supplied. Do not fabricate it.
+- Supabase, OAuth, live AI, custom-domain DNS, and paid services are separate future decisions.
+- Source `scripts/env.ps1` for F: Node/cache/temp. Verify retained processes and Git state; do not start duplicate servers or trust notes as proof.

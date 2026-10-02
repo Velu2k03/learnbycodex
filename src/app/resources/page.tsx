@@ -3,4 +3,94 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { PageHeading, Badge, ExternalLink } from "@/components/ui";
 import { resources } from "@/data/resources";
-export default function ResourcesPage(){const [category,setCategory]=useState("All resources");const [query,setQuery]=useState("");const categories=["All resources",...new Set(resources.map(r=>r.category))];const shown=resources.filter(r=>(category==="All resources"||r.category===category)&&`${r.name} ${r.description}`.toLowerCase().includes(query.toLowerCase()));return <div className="page"><PageHeading eyebrow="OPTIONAL EXPLORATION" title="Good resources. In the right place." description="Your mission is the main path. Come here when you want another explanation or a new project idea."/><div className="notice">Lab lessons, exercises, quizzes, and project briefs are original and live here. External courses stay with their providers. “Reusable source” means the license may permit a future import with its required notices; it does not mean the course is already imported.</div><label className="field" style={{maxWidth:500}}><span><Search size={14}/> Find a resource</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Try Git, agents, or projects"/></label><div className="filter-row">{categories.map(c=><button key={c} onClick={()=>setCategory(c)} aria-pressed={category===c} className={`filter-button ${category===c?"active":""}`}>{c}</button>)}</div><div className="three-columns">{shown.map(r=><article className="card resource-card" key={r.id}><div className="provider-mark">{r.provider.slice(0,1)}</div><span className="small-label">{r.provider}</span><h3>{r.name}</h3><p>{r.description}</p><details><summary>Source & reuse information</summary><p><strong>{r.license}</strong></p><p>{r.reuse}</p><ExternalLink href={r.licenseUrl}>Source or license terms</ExternalLink><p>Reviewed 2 October 2026. Linked items and assets may have separate terms.</p></details><div className="resource-footer"><Badge tone={r.type==="Reusable source"?"green":"neutral"}>{r.type}</Badge><ExternalLink href={r.url}>Open resource</ExternalLink></div></article>)}</div>{shown.length===0&&<div className="empty-state"><h3>No matching resources</h3><p>Try another search or choose All resources.</p></div>}</div>}
+export default function ResourcesPage() {
+  const [category, setCategory] = useState("All resources");
+  const [query, setQuery] = useState("");
+  const categories = [
+    "All resources",
+    ...new Set(resources.map((r) => r.category)),
+  ];
+  const shown = resources.filter(
+    (r) =>
+      (category === "All resources" || r.category === category) &&
+      `${r.name} ${r.description}`.toLowerCase().includes(query.toLowerCase()),
+  );
+  return (
+    <div className="page">
+      <PageHeading
+        eyebrow="OPTIONAL EXPLORATION"
+        title="Good resources. In the right place."
+        description="Your mission is the main path. Come here when you want another explanation or a new project idea."
+      />
+      <div className="notice">
+        Lab lessons, exercises, quizzes, and project briefs are original and
+        live here. External courses stay with their providers. “Reusable source”
+        means the license may permit a future import with its required notices;
+        it does not mean the course is already imported.
+      </div>
+      <label className="field" style={{ maxWidth: 500 }}>
+        <span>
+          <Search size={14} /> Find a resource
+        </span>
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Try Git, agents, or projects"
+        />
+      </label>
+      <div className="filter-row">
+        {categories.map((c) => (
+          <button
+            key={c}
+            onClick={() => setCategory(c)}
+            aria-pressed={category === c}
+            className={`filter-button ${category === c ? "active" : ""}`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+      <div className="three-columns">
+        {shown.map((r) => (
+          <article className="card resource-card" key={r.id}>
+            <div className="provider-mark">{r.provider.slice(0, 1)}</div>
+            <span className="small-label">{r.provider}</span>
+            <h3>{r.name}</h3>
+            <p>{r.description}</p>
+            <Badge tone="blue">{r.difficulty}</Badge>
+            <details>
+              <summary>Source & reuse information</summary>
+              <p>Provider / attribution: {r.attribution}</p>
+              <p>Time: {r.estimatedTime}</p>
+              <p>{r.redistribution}</p>
+              <p>
+                <strong>{r.license}</strong>
+              </p>
+              <p>{r.reuse}</p>
+              <ExternalLink href={r.licenseUrl}>
+                Source or license terms
+              </ExternalLink>
+              <p>
+                Reviewed 2 October 2026. Linked items and assets may have
+                separate terms.
+              </p>
+            </details>
+            <div className="resource-footer">
+              <Badge tone={r.type === "Reusable source" ? "green" : "neutral"}>
+                {r.type}
+              </Badge>
+              <ExternalLink href={r.url}>Open resource</ExternalLink>
+            </div>
+          </article>
+        ))}
+      </div>
+      {shown.length === 0 && (
+        <div className="empty-state">
+          <h3>No matching resources</h3>
+          <p>Try another search or choose All resources.</p>
+        </div>
+      )}
+    </div>
+  );
+}

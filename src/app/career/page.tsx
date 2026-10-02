@@ -6,14 +6,180 @@ import { PageHeading, Badge } from "@/components/ui";
 import { useLab } from "@/components/lab-provider";
 import { missions, roles } from "@/data/curriculum";
 import { downloadText } from "@/lib/download";
-const tracks=[
-  {role:roles[0],focus:"Build useful applications with LLMs, retrieval, agents, and evaluation.",skills:"Python · APIs · RAG · evaluations",project:"Hybrid RAG pipeline"},
-  {role:roles[1],focus:"Build the services and infrastructure that make AI reliable in production.",skills:"APIs · Linux · Docker · monitoring",project:"LLM gateway"},
-  {role:roles[2],focus:"Turn repeatable work into dependable workflows with human review.",skills:"Python · integrations · state · tools",project:"Agent orchestration"},
-  {role:roles[3],focus:"Work with customers to implement and deploy solutions to real problems.",skills:"Discovery · full stack · deployment",project:"A deployed customer-workflow prototype"},
-  {role:roles[4],focus:"Translate needs into an architecture, demo, and clear technical decision.",skills:"Discovery · architecture · demos",project:"A solution brief with a tested prototype"},
-  {role:roles[5],focus:"Prepare data, train models, evaluate them, and operate them reliably.",skills:"Statistics · data · training · MLOps",project:"A reproducible training and evaluation pipeline"},
-  {role:roles[6],focus:"Protect data and tool access, and test unsafe AI behavior.",skills:"Threat modeling · injection · access control",project:"An AI threat model and evaluation suite"},
+const tracks = [
+  {
+    role: roles[0],
+    focus:
+      "Build useful applications with LLMs, retrieval, agents, and evaluation.",
+    skills: "Python · APIs · RAG · evaluations",
+    project: "Hybrid RAG pipeline",
+  },
+  {
+    role: roles[1],
+    focus:
+      "Build the services and infrastructure that make AI reliable in production.",
+    skills: "APIs · Linux · Docker · monitoring",
+    project: "LLM gateway",
+  },
+  {
+    role: roles[2],
+    focus: "Turn repeatable work into dependable workflows with human review.",
+    skills: "Python · integrations · state · tools",
+    project: "Agent orchestration",
+  },
+  {
+    role: roles[3],
+    focus:
+      "Work with customers to implement and deploy solutions to real problems.",
+    skills: "Discovery · full stack · deployment",
+    project: "A deployed customer-workflow prototype",
+  },
+  {
+    role: roles[4],
+    focus:
+      "Translate needs into an architecture, demo, and clear technical decision.",
+    skills: "Discovery · architecture · demos",
+    project: "A solution brief with a tested prototype",
+  },
+  {
+    role: roles[5],
+    focus:
+      "Prepare data, train models, evaluate them, and operate them reliably.",
+    skills: "Statistics · data · training · MLOps",
+    project: "A reproducible training and evaluation pipeline",
+  },
+  {
+    role: roles[6],
+    focus: "Protect data and tool access, and test unsafe AI behavior.",
+    skills: "Threat modeling · injection · access control",
+    project: "An AI threat model and evaluation suite",
+  },
 ];
-export default function CareerPage(){const {state,setState}=useLab();const [selected,setSelected]=useState<string[]>([]);const completed=missions.filter(m=>state.missions[m.id]?.completedAt);const ready=state.evidence.filter(e=>e.readme&&selected.includes(e.url));const draft=`${state.profile.name}\nTarget direction: ${state.profile.role}\n\nPROJECT EVIDENCE DRAFT — REVIEW BEFORE USING IN A RESUME\n\n${ready.length?ready.map(e=>`${e.name}\n${e.url}\nPublic repository with README and commit ${e.commit.slice(0,7)}, observed ${e.checkedAt.slice(0,10)}.\nMy contribution, implementation details, evaluation results, and impact: add accurate details.\n`).join("\n"):"No project has been selected yet. Check a repository with a README, then confirm your own contribution below."}\n\nNEXT: Add your actual education, contact details, employment history, and precise project contributions. Do not add numerical impact without measurements.\n\nLab activity: ${completed.length} starter mission(s) completed with self-reported build evidence. This activity alone does not verify professional expertise or experience.\n`;
-return <div className="page"><PageHeading eyebrow="DIRECTION, WITHOUT PRESSURE" title="Grow into the role you want." description="Your resume comes from things you can explain and demonstrate. Start building that evidence now."/><div className="career-top"><div className="notice">Your priorities are AI engineering, AI platforms, and AI automation. The other tracks are here for exploration. All start with shared foundations.</div><div className="role-grid">{tracks.map((t,i)=><article className={`role-card ${state.profile.role===t.role?"selected":""}`} key={t.role}><Badge tone={i<3?"green":"neutral"}>{i<3?"Your priority":"Explore later"}</Badge><h3>{t.role}</h3><p>{t.focus}</p><div className="divider"/><p><strong>Build toward:</strong> {t.skills}</p><p style={{marginTop:8}}><strong>Evidence:</strong> {t.project}</p><button className="button secondary" onClick={()=>setState(s=>({...s,profile:{...s.profile,role:t.role}}))}><Target size={14}/>{state.profile.role===t.role?"Current focus":"Set as current focus"}</button></article>)}</div><section className="card" style={{marginTop:26}}><div className="card-heading"><BriefcaseBusiness size={20}/><h2>Your resume starts with evidence.</h2></div><p className="muted">This first milestone prepares a project-evidence draft. It does not generate invented experience, verify authorship, or replace a full resume review. Your actual education, work history, and project contributions are still needed.</p><div className="check-grid" style={{marginTop:20}}><span>{completed.length} starter missions completed</span><span>{state.evidence.length} public repositories checked</span><span>Employment history: not supplied</span><span>Provider credentials: not independently verified</span></div>{state.evidence.filter(e=>e.readme).length>0?<><h3 className="small-heading">Select work you actually contributed to</h3>{state.evidence.filter(e=>e.readme).map(e=><label className="task-check" key={e.url}><input type="checkbox" checked={selected.includes(e.url)} onChange={event=>setSelected(s=>event.target.checked?[...s,e.url]:s.filter(u=>u!==e.url))}/><span>I contributed to {e.name} and will describe my contribution honestly.</span></label>)}</>:<div className="action-row"><Link href="/portfolio" className="button primary">Add repository evidence<ArrowRight size={16}/></Link></div>}</section></div><h2 className="small-heading">Project evidence draft</h2><div className="resume-preview">{draft}</div><div className="action-row"><button className="button primary" disabled={ready.length===0} onClick={()=>downloadText("velu-project-evidence-draft.txt",draft,"text/plain")}><Download size={16}/>Download evidence draft</button><p className="muted">Choose an F: folder when saving.</p></div></div>}
+export default function CareerPage() {
+  const { state, setState } = useLab();
+  const [selected, setSelected] = useState<string[]>([]);
+  const completed = missions.filter((m) => state.missions[m.id]?.completedAt);
+  const ready = state.evidence.filter(
+    (e) => e.readme && selected.includes(e.url),
+  );
+  const draft = `${state.profile.name}\nTarget direction: ${state.profile.role}\n\nPROJECT EVIDENCE DRAFT — REVIEW BEFORE USING IN A RESUME\n\n${ready.length ? ready.map((e) => `${e.name}\n${e.url}\nPublic repository with README and commit ${e.commit.slice(0, 7)}, observed ${e.checkedAt.slice(0, 10)}.\nMy contribution, implementation details, evaluation results, and impact: add accurate details.\n`).join("\n") : "No project has been selected yet. Check a repository with a README, then confirm your own contribution below."}\n\nNEXT: Add your actual education, contact details, employment history, and precise project contributions. Do not add numerical impact without measurements.\n\nLab activity: ${completed.length} starter mission(s) completed with self-reported build evidence. This activity alone does not verify professional expertise or experience.\n`;
+  return (
+    <div className="page">
+      <PageHeading
+        eyebrow="DIRECTION, WITHOUT PRESSURE"
+        title="Grow into the role you want."
+        description="Your resume comes from things you can explain and demonstrate. Start building that evidence now."
+      />
+      <div className="career-top">
+        <div className="notice">
+          Your priorities are AI engineering, AI platforms, and AI automation.
+          The other tracks are here for exploration. All start with shared
+          foundations.
+        </div>
+        <div className="role-grid">
+          {tracks.map((t, i) => (
+            <article
+              className={`role-card ${state.profile.role === t.role ? "selected" : ""}`}
+              key={t.role}
+            >
+              <Badge tone={i < 3 ? "green" : "neutral"}>
+                {i < 3 ? "Your priority" : "Explore later"}
+              </Badge>
+              <h3>{t.role}</h3>
+              <p>{t.focus}</p>
+              <div className="divider" />
+              <p>
+                <strong>Build toward:</strong> {t.skills}
+              </p>
+              <p style={{ marginTop: 8 }}>
+                <strong>Evidence:</strong> {t.project}
+              </p>
+              <button
+                className="button secondary"
+                onClick={() =>
+                  setState((s) => ({
+                    ...s,
+                    profile: { ...s.profile, role: t.role },
+                  }))
+                }
+              >
+                <Target size={14} />
+                {state.profile.role === t.role
+                  ? "Current focus"
+                  : "Set as current focus"}
+              </button>
+            </article>
+          ))}
+        </div>
+        <section className="card" style={{ marginTop: 26 }}>
+          <div className="card-heading">
+            <BriefcaseBusiness size={20} />
+            <h2>Your resume starts with evidence.</h2>
+          </div>
+          <p className="muted">
+            This first milestone prepares a project-evidence draft. It does not
+            generate invented experience, verify authorship, or replace a full
+            resume review. Your actual education, work history, and project
+            contributions are still needed.
+          </p>
+          <div className="check-grid" style={{ marginTop: 20 }}>
+            <span>{completed.length} starter missions completed</span>
+            <span>{state.evidence.length} public repositories checked</span>
+            <span>Employment history: not supplied</span>
+            <span>Provider credentials: not independently verified</span>
+          </div>
+          {state.evidence.filter((e) => e.readme).length > 0 ? (
+            <>
+              <h3 className="small-heading">
+                Select work you actually contributed to
+              </h3>
+              {state.evidence
+                .filter((e) => e.readme)
+                .map((e) => (
+                  <label className="task-check" key={e.url}>
+                    <input
+                      type="checkbox"
+                      checked={selected.includes(e.url)}
+                      onChange={(event) =>
+                        setSelected((s) =>
+                          event.target.checked
+                            ? [...s, e.url]
+                            : s.filter((u) => u !== e.url),
+                        )
+                      }
+                    />
+                    <span>
+                      I contributed to {e.name} and will describe my
+                      contribution honestly.
+                    </span>
+                  </label>
+                ))}
+            </>
+          ) : (
+            <div className="action-row">
+              <Link href="/portfolio" className="button primary">
+                Add repository evidence
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          )}
+        </section>
+      </div>
+      <h2 className="small-heading">Project evidence draft</h2>
+      <div className="resume-preview">{draft}</div>
+      <div className="action-row">
+        <button
+          className="button primary"
+          disabled={ready.length === 0}
+          onClick={() =>
+            downloadText("velu-project-evidence-draft.txt", draft, "text/plain")
+          }
+        >
+          <Download size={16} />
+          Download evidence draft
+        </button>
+        <p className="muted">Choose an F: folder when saving.</p>
+      </div>
+    </div>
+  );
+}

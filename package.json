@@ -1,36 +1,41 @@
 {
-    "name":  "drvelu-ai-engineering-lab",
-    "version":  "0.1.0",
-    "private":  true,
-    "scripts":  {
-                    "dev":  "next dev",
-                    "build":  "next build",
-                    "start":  "next start",
-                    "typecheck":  "tsc --noEmit",
-                    "test":  "tsx --test tests/*.test.ts"
-                },
-    "engines":  {
-                    "node":  "\u003e=22"
-                },
-    "dependencies":  {
-                        "next":  "16.3.8",
-                        "react":  "19.3.0",
-                        "react-dom":  "19.3.0",
-                        "lucide-react":  "1.49.0",
-                        "motion":  "13.5.0",
-                         "@codemirror/lang-css":  "^6.3.1",
-                         "@codemirror/lang-html":  "^6.4.12",
-                         "@codemirror/lang-javascript":  "^6.2.5",
-                         "@codemirror/lang-markdown":  "^6.5.2",
-                         "@codemirror/lang-python":  "^6.2.1",
-                         "@codemirror/lang-sql":  "^6.10.0",
-                                 "@uiw/react-codemirror":  "^4.25.12"
-                     },
-    "devDependencies":  {
-                                     "typescript":  "7.0.2",
-                            "@types/node":  "26.6.4",
-                            "@types/react":  "19.3.0",
-                            "@types/react-dom":  "19.3.0",
-                                     "tsx":  "4.23.15"
-                        }
+  "name": "drvelu-ai-engineering-lab",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "lint": "eslint src tests public scripts eslint.config.mjs next.config.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.12",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@codemirror/lang-markdown": "^6.5.2",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/lang-sql": "^6.10.0",
+    "@uiw/react-codemirror": "^4.25.12",
+    "lucide-react": "1.49.0",
+    "motion": "13.5.0",
+    "next": "16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@typescript/native": "npm:typescript@7.0.2",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.8",
+    "prettier": "^3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "npm:@typescript/typescript6@6.0.2"
+  }
 }
