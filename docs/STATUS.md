@@ -48,7 +48,7 @@ Workspace: `F:\Codes\Learn`. Next.js source is in `src/`. The in-browser mission
 
 ## Next exact actions
 
-1. Review and push the browser workbench changes to `origin/main`.
+1. Browser workbench commit `cc1748b` is pushed to `origin/main`.
 2. Finish F:-only Vercel deployment instructions/script using the installed CLI at `.local/vercel-tool` and an F: global config directory.
 3. Configure Supabase only after a project and authentication settings are available; never place keys in source or checkpoints.
 4. If Vercel authentication is available, deploy validated source and record the returned deployment URL and status. Do not claim publication before that.
